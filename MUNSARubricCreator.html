@@ -1,0 +1,157 @@
+<!doctype html>
+<html style="height:100%;">
+<head>
+<meta charset="utf-8">
+<title>MUNSA_Rubric_Creator.js | Eric Love</title>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link href="sitestyle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="navbar"> <a href="index.html" class="logo"><img src="images/PersonalLogo.png" width="629" height="630" alt=""/></a> <a href="index.html">Home</a> <a href="projects.html" >Projects</a> 
+<a href="resume.html">Resume</a>
+  <div class="dropdown">
+    <div class = "dropbtn">
+      <button class = "dropbtn">Contact </button>
+      <div class="dropdown-content"> <a href="mailto:ericlove2002@gmail.com" target="_blank">Email</a> <a href="https://www.linkedin.com/in/ericlove02" target="_blank">LinkedIn</a> <a href="contact.html">Message Me</a> </div>
+    </div>
+  </div>
+</div>
+<div style="padding-top:40px;height: 100%;
+    height: -webkit-calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: calc(100% - 40px);">
+<br>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:50%;margin:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">function</span> onOpen(e) {
+  SpreadsheetApp.getUi().createAddonMenu()
+ 
+  .addItem(<span style="">&#39;Open Menu&#39;</span>, <span style="">&#39;showSidebar&#39;</span>) 
+      .addToUi();
+}
+
+<span style="color: #008800; font-weight: bold">function</span> onInstall(e){
+  onOpen(e);
+}
+
+<span style="color: #008800; font-weight: bold">function</span> showSidebar() {
+  <span style="color: #008800; font-weight: bold">var</span> html <span style="color: #333333">=</span> HtmlService.createHtmlOutputFromFile(<span style="">&#39;sidebar&#39;</span>)
+      .setSandboxMode(HtmlService.SandboxMode.IFRAME)
+      .setTitle(<span style="">&#39;Send Delegate Rubrics&#39;</span>)
+      .setWidth(<span style="color: #0000DD; font-weight: bold">300</span>);
+  SpreadsheetApp.getUi() 
+      .showSidebar(html);
+}
+
+<span style="color: #008800; font-weight: bold">function</span> sendRubrics() {
+  <span style="color: #008800; font-weight: bold">try</span>{
+  <span style="color: #008800; font-weight: bold">var</span> ui <span style="color: #333333">=</span> SpreadsheetApp.getUi();
+  
+  <span style="color: #008800; font-weight: bold">var</span> schoolName <span style="color: #333333">=</span> ui.prompt(<span style="">&quot;Rubrics&quot;</span>, <span style="">&quot;Enter the school&#39;s name: &quot;</span>, ui.ButtonSet.OK).getResponseText();
+  <span style="color: #008800; font-weight: bold">var</span> column <span style="color: #333333">=</span> ui.prompt(<span style="">&quot;Rubrics&quot;</span>, <span style="">&quot;Enter the school&#39;s column: &quot;</span>, ui.ButtonSet.OK).getResponseText();
+  <span style="color: #008800; font-weight: bold">var</span> lastCell <span style="color: #333333">=</span> ui.prompt(<span style="">&quot;Rubrics&quot;</span>, <span style="">&quot;Enter the last row of the school&#39;s column: &quot;</span>, ui.ButtonSet.OK).getResponseText();
+  
+  <span style="color: #008800; font-weight: bold">var</span> ss <span style="color: #333333">=</span> SpreadsheetApp.getActiveSpreadsheet();
+  <span style="color: #008800; font-weight: bold">var</span> data <span style="color: #333333">=</span> ss.getSheets()[<span style="color: #0000DD; font-weight: bold">0</span>];
+  
+  <span style="color: #008800; font-weight: bold">var</span> trueSchool <span style="color: #333333">=</span> data.getRange(column <span style="color: #333333">+</span> <span style="">&quot;1&quot;</span>).getValue();
+  
+  <span style="color: #008800; font-weight: bold">if</span>(schoolName <span style="color: #333333">!=</span> trueSchool){ui.alert(<span style="">&quot;Check school name and column&quot;</span>, ui.ButtonSet.OK);}
+  <span style="color: #008800; font-weight: bold">else</span>{
+    <span style="color: #008800; font-weight: bold">var</span> attachments <span style="color: #333333">=</span> [];
+    <span style="color: #008800; font-weight: bold">var</span> id <span style="color: #333333">=</span> <span style="">&quot;&quot;</span>;
+    
+    <span style="color: #008800; font-weight: bold">for</span>(<span style="color: #008800; font-weight: bold">var</span> i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">3</span>; i <span style="color: #333333">&lt;=</span> lastCell; <span style="color: #333333">++</span>i){
+      <span style="color: #008800; font-weight: bold">var</span> checkCell <span style="color: #333333">=</span> <span style="color: #007020">parseInt</span>(lastCell) <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+      id <span style="color: #333333">=</span> data.getRange(column<span style="color: #333333">+</span><span style="">&quot;&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();  
+      <span style="color: #008800; font-weight: bold">if</span>(id <span style="color: #333333">!=</span> <span style="">&quot;&quot;</span>){
+        attachments.push(DriveApp.getFileById(id).getAs(<span style="">&#39;application/pdf&#39;</span>));
+        SpreadsheetApp.getActiveSheet().getRange(column<span style="color: #333333">+</span>checkCell.toString()).setValue(<span style="">&quot;CELL &quot;</span> <span style="color: #333333">+</span> i.toString() <span style="color: #333333">+</span> <span style="">&quot; ADDED&quot;</span>);
+      }
+    }
+  
+  }
+  
+  <span style="color: #008800; font-weight: bold">var</span> body <span style="color: #333333">=</span> <span style="">&quot;Hello sponsors! \nAttached are your delegate&#39;s rubrics from MUNSA&#39;s non-crisis rooms. Please let us know if you are missing anything or have any questions.&quot;</span>;
+  body <span style="color: #333333">+=</span> <span style="">&quot; On behalf of Secretariat and all of MUNSA, thank you so much for attending our conference and we hope to see you next year! \n\n Ryan Tubbesing \n&quot;</span>
+  <span style="color: #008800; font-weight: bold">var</span> email <span style="color: #333333">=</span> data.getRange(column<span style="color: #333333">+</span><span style="">&quot;2&quot;</span>).getValue();
+  <span style="color: #888888">//  var message = </span>
+  <span style="color: #888888">//MailApp.sendEmail(message)</span>
+    GmailApp.createDraft(email, schoolName <span style="color: #333333">+</span> <span style="">&#39; -- MUNSA XXIV: Regular Room Delegate Rubrics&#39;</span>, body, {attachments<span style="color: #333333">:</span> attachments, name<span style="color: #333333">:</span> <span style="">&#39;MUNSA&#39;</span>});
+  
+  
+  ui.alert(<span style="">&quot;School sending complete! Email in drafts.&quot;</span>, ui.ButtonSet.OK);
+}
+  <span style="color: #008800; font-weight: bold">catch</span>(error){
+    <span style="color: #008800; font-weight: bold">var</span> ui <span style="color: #333333">=</span> SpreadsheetApp.getUi();
+    ui.alert(<span style="">&quot;Error occured while trying to send rubrics.\n More information on error: \n\n [&quot;</span> <span style="color: #333333">+</span> error <span style="color: #333333">+</span> <span style="">&quot;]&quot;</span>, ui.ButtonSet.OK);
+  }
+}
+</pre></td></tr></table></div>
+
+<br>
+</div>
+</body>
+</html>

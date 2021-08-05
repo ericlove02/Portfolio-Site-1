@@ -1,0 +1,1271 @@
+<!doctype html>
+<html style="height:100%;">
+<head>
+<meta charset="utf-8">
+<title>MUNSA_Rubric_Sender.js | Eric Love</title>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link href="sitestyle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="navbar"> <a href="index.html" class="logo"><img src="images/PersonalLogo.png" width="629" height="630" alt=""/></a> <a href="index.html">Home</a> <a href="projects.html" >Projects</a> 
+<a href="resume.html">Resume</a>
+  <div class="dropdown">
+    <div class = "dropbtn">
+      <button class = "dropbtn">Contact </button>
+      <div class="dropdown-content"> <a href="mailto:ericlove2002@gmail.com" target="_blank">Email</a> <a href="https://www.linkedin.com/in/ericlove02" target="_blank">LinkedIn</a> <a href="contact.html">Message Me</a> </div>
+    </div>
+  </div>
+</div>
+<div style="padding-top:40px;height: 100%;
+    height: -webkit-calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: calc(100% - 40px);">
+<br>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:50%;margin:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">function</span> onOpen(e){
+  SpreadsheetApp.getUi().createAddonMenu()
+  .addItem(<span style="">&#39;Create Rubric IDs&#39;</span>, <span style="">&#39;createRubrics&#39;</span>).addToUi();
+  <span style="color: #888888">//.addItem(&#39;School Awards&#39;, &#39;getSchoolAwards&#39;).addToUi();</span>
+  
+}
+
+<span style="color: #008800; font-weight: bold">function</span> onInstall(e){
+  onOpen(e);
+}
+
+<span style="color: #008800; font-weight: bold">function</span> createRubrics() {
+  <span style="color: #008800; font-weight: bold">var</span> ui <span style="color: #333333">=</span> SpreadsheetApp.getUi();
+  <span style="color: #008800; font-weight: bold">var</span> rubricTemplate <span style="color: #333333">=</span> <span style="">&quot;1qYPWV_4cSIjt8Su2ueQj53R75ProccS2I12hfFQL-YI&quot;</span>;
+  
+  <span style="color: #008800; font-weight: bold">var</span> startStr <span style="color: #333333">=</span> ui.prompt(<span style="">&quot;Total Rubrics&quot;</span>, <span style="">&quot;Enter the first row you are creating: &quot;</span>, ui.ButtonSet.OK).getResponseText();
+  <span style="color: #008800; font-weight: bold">var</span> endStr <span style="color: #333333">=</span> ui.prompt(<span style="">&quot;Total Rubrics&quot;</span>, <span style="">&quot;Enter the last row you are creating: &quot;</span>, ui.ButtonSet.OK).getResponseText();
+  
+  <span style="color: #008800; font-weight: bold">var</span> start <span style="color: #333333">=</span> <span style="color: #007020">parseInt</span>(startStr);
+  <span style="color: #008800; font-weight: bold">var</span> end <span style="color: #333333">=</span> <span style="color: #007020">parseInt</span>(endStr);
+  
+  <span style="color: #008800; font-weight: bold">var</span> ss <span style="color: #333333">=</span> SpreadsheetApp.getActiveSpreadsheet();
+  <span style="color: #008800; font-weight: bold">var</span> data <span style="color: #333333">=</span> ss.getSheets()[<span style="color: #0000DD; font-weight: bold">0</span>];
+  
+  <span style="color: #008800; font-weight: bold">for</span>(<span style="color: #008800; font-weight: bold">var</span> i <span style="color: #333333">=</span> start; i <span style="color: #333333">&lt;=</span> end; <span style="color: #333333">++</span>i){
+    <span style="color: #008800; font-weight: bold">var</span> committee <span style="color: #333333">=</span> data.getRange(<span style="">&quot;B&quot;</span><span style="color: #333333">+</span>i.toString()).getValue().trim();
+    <span style="color: #008800; font-weight: bold">var</span> country <span style="color: #333333">=</span> data.getRange(<span style="">&quot;C&quot;</span><span style="color: #333333">+</span>i.toString()).getValue().trim();
+    <span style="color: #008800; font-weight: bold">var</span> auth <span style="color: #333333">=</span> data.getRange(<span style="">&quot;D&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();
+    <span style="color: #008800; font-weight: bold">var</span> speakersList <span style="color: #333333">=</span> data.getRange(<span style="">&quot;E&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();
+    <span style="color: #008800; font-weight: bold">var</span> mod <span style="color: #333333">=</span> data.getRange(<span style="">&quot;F&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();
+    <span style="color: #008800; font-weight: bold">var</span> unmod <span style="color: #333333">=</span> data.getRange(<span style="">&quot;G&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();
+    <span style="color: #008800; font-weight: bold">var</span> parlipro <span style="color: #333333">=</span> data.getRange(<span style="">&quot;H&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();
+    <span style="color: #008800; font-weight: bold">var</span> tact <span style="color: #333333">=</span> data.getRange(<span style="">&quot;I&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();
+    <span style="color: #008800; font-weight: bold">var</span> publicSpeaking <span style="color: #333333">=</span> data.getRange(<span style="">&quot;J&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();
+    <span style="color: #008800; font-weight: bold">var</span> bonus <span style="color: #333333">=</span> data.getRange(<span style="">&quot;K&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();
+    <span style="color: #008800; font-weight: bold">var</span> comments <span style="color: #333333">=</span> data.getRange(<span style="">&quot;L&quot;</span><span style="color: #333333">+</span>i.toString()).getValue().trim();
+    <span style="color: #008800; font-weight: bold">var</span> participation <span style="color: #333333">=</span> data.getRange(<span style="">&quot;M&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();
+    <span style="color: #008800; font-weight: bold">var</span> diplomacy <span style="color: #333333">=</span> data.getRange(<span style="">&quot;N&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();
+    <span style="color: #008800; font-weight: bold">var</span> total <span style="color: #333333">=</span> data.getRange(<span style="">&quot;O&quot;</span><span style="color: #333333">+</span>i.toString()).getValue();
+  
+    <span style="color: #008800; font-weight: bold">var</span> school <span style="color: #333333">=</span> <span style="">&quot;&quot;</span>;
+    <span style="color: #008800; font-weight: bold">var</span> newCol <span style="color: #333333">=</span> <span style="">&quot;&quot;</span>;
+    
+    country <span style="color: #333333">=</span> country.trim();
+    
+    <span style="color: #008800; font-weight: bold">switch</span>(country){
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Canada&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Tom C. Clark High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;B&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Germany&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Tom C. Clark High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;B&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Hungary&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Tom C. Clark High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;B&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Brazil&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Euroamerican School of Monterrey&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;C&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Bahamas&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Euroamerican School of Monterrey&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;C&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Netherlands&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Euroamerican School of Monterrey&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;C&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Ukraine&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;La Vernia High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;D&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Sweden&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;La Vernia High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;D&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Islamic Republic of Iran&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;St. Andrew&#39;s Episcopal School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;E&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;United States of America&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Reagan High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;F&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Japan&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Reagan High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;F&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Chile&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Reagan High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;F&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Colombia&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Reagan High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;F&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Cyprus&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Reagan High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;F&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;          
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Argentina&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Reagan High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;F&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Cambodia&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Reagan High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;F&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Belize&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Reagan High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;F&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Syrian Arab Republic&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Keystone High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;G&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;New Zealand&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Keystone High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;G&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Turkey&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Westlake High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;H&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Uruguay&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Westlake High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;H&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Zambia&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Westlake High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;H&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Australia&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Colegio Nexus&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;I&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Lithuania&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Colegio Nexus&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;I&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Italy&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Great Hearts Northern Oaks&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;J&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Zimbabwe&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Great Hearts Northern Oaks&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;J&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Jordan&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Great Hearts Northern Oaks&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;J&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Venezuela&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Meridian World School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;K&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;France&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Meridian World School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;K&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Bolivia&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Meridian World School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;K&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Poland&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Meridian World School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;K&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Greece&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Advanced Learning Academy&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;L&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Ireland&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Advanced Learning Academy&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;L&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Belarus&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Advanced Learning Academy&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;L&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Switzerland&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Colegio Mirasierra&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;M&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;United Kingdom&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Austin High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;N&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;China&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Austin High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;N&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Czech Republic&quot;</span>)<span style="color: #333333">:</span> 
+        school <span style="color: #333333">=</span> <span style="">&quot;Austin High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;N&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Haiti&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Macarthur High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;O&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Cuba&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Macarthur High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;O&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Costa Rica&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Macarthur High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;O&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Guyana&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Macarthur High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;O&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Mexico&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Johnson High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;P&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Guatemala&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Johnson High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;P&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Austria&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Johnson High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;P&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Mali&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Johnson High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;P&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Denmark&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Houston Christian High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;Q&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Egypt&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Houston Christian High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;Q&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Qatar&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Houston Christian High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;Q&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Belgium&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;The Oakridge School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;R&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;South Sudan&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;The Oakridge School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;R&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Israel&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Byron P. Steele High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;S&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Bulgaria&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Byron P. Steele High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;S&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Portugal&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Samuel Clemens High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;T&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Nepal&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Samuel Clemens High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;T&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Georgia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Liberal Arts and Science Academy&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;U&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Iraq&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Liberal Arts and Science Academy&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;U&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Russian Federation&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Instituto Anglia&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;V&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Tunisia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Instituto Anglia&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;V&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;United Arab Emirates&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Lake Travis High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;W&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Philippines&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Lake Travis High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;W&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Saudi Arabia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Lee High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;X&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Kenya&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Lee High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;X&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Democratic People&#39;s Republic of Korea&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Lee High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;X&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;South Africa&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;CAST Tech High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;Y&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Kuwait&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Churchill High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;Z&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Romania&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Churchill High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;Z&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Saint Lucia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Churchill High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;Z&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Antigua and Barbuda&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Churchill High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;Z&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Thailand&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;IDEA Carver College Prep&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AA&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Guinea&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;IDEA Carver College Prep&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AA&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Cote D&#39;lvoire&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Westchester Academy for International Studies&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AB&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Bosnia and Herzegovina&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Westchester Academy for International Studies&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AB&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Trinidad and Tobago&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Sharpstown International School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AC&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Saint Vincent and the Grenadines&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Sharpstown International School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AC&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Barbados&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Sharpstown International School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AC&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Dominica&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Sharpstown International School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AC&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Jamaica&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Sharpstown International School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AC&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Saint Kitts and Nevis&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Sharpstown International School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AC&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Suriname&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Sharpstown International School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AC&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;The former Yugoslav Republic of Macedonia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Pleasanton High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AD&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Yemen&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Second Baptist School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AE&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Madagascar&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;American Institute of Monterrey Preparatory School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AF&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Paraguay&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;American Institute of Monterrey Preparatory School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AF&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Grenada&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;American Institute of Monterrey Preparatory School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AF&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Sri Lanka&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;American Institute of Monterrey Preparatory School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AF&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;India&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Round Rock High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AG&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Republic of Korea&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Round Rock High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AG&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Vietnam&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Round Rock High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AG&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Mongolia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Round Rock High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AG&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Niger&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Wimberely High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AH&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Laos&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Travis Early College High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AI&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Panama&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Travis Early College High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AI&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Guadeloupe&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Travis Early College High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AI&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Martinique&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Travis Early College High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AI&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Indonesia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Plano East Senior High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AJ&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Liberia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Plano East Senior High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AJ&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Sudan&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Kazakhstan&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Palestine&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Cameroon&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Iceland&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Bangladesh&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Nicaragua&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Ecuador&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Dominican Republic&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Angola&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Eritrea&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;State of Libya&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Ethiopia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Norway&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Rwanda&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Botswana&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Croatia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Oman&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Burkina Faso&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;International School of the Americas&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AK&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Honduras&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;The Colony High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AL&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Malaysia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;The Colony High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AL&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Serbia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;The Colony High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AL&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Lebanon&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;The Colony High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AL&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Spain&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;TMI&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AM&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Peru&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;TMI&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AM&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Sierra Lenone&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Thomas Jefferson High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AN&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Singapore&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Brooks Collegiate Academy&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AO&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Namibia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Brooks Collegiate Academy&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AO&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Finland&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Central Catholic High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AP&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Armenia&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Central Catholic High School&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AP&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Nigeria&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;IDEA South Flores&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AQ&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Central African Republic&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;IDEA South Flores&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AQ&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Chad&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;John Jay&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AR&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Seychelles&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Saint Mary&#39;s Hall&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AS&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span>(<span style="">&quot;Liechtenstein&quot;</span>)<span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;Saint Mary&#39;s Hall&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AS&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">default</span><span style="color: #333333">:</span>
+        school <span style="color: #333333">=</span> <span style="">&quot;UNKNOWN&quot;</span>;
+        newCol <span style="color: #333333">=</span> <span style="">&quot;AT&quot;</span>;
+        <span style="color: #008800; font-weight: bold">break</span>;
+    }
+    
+    
+    
+    <span style="color: #008800; font-weight: bold">var</span> rubricName <span style="color: #333333">=</span> school <span style="color: #333333">+</span> <span style="">&quot; -- &quot;</span> <span style="color: #333333">+</span> country <span style="color: #333333">+</span> <span style="">&quot; &quot;</span> <span style="color: #333333">+</span> committee <span style="color: #333333">+</span> <span style="">&quot; Delegate Rubric&quot;</span>;
+    <span style="color: #008800; font-weight: bold">var</span> DelegateRubric <span style="color: #333333">=</span> DriveApp.getFileById(rubricTemplate)
+    .makeCopy(rubricName)
+    .getId();
+    <span style="color: #008800; font-weight: bold">var</span> copyDoc <span style="color: #333333">=</span> DocumentApp.openById(DelegateRubric);
+
+    <span style="color: #008800; font-weight: bold">var</span> copyBody <span style="color: #333333">=</span> copyDoc.getActiveSection();
+    
+    copyBody.replaceText(<span style="">&#39;keyCommittee&#39;</span>, committee);
+    copyBody.replaceText(<span style="">&#39;keyDelnam&#39;</span>, country);
+    copyBody.replaceText(<span style="">&#39;keySchool&#39;</span>, school);
+    copyBody.replaceText(<span style="">&#39;keyAuth&#39;</span>, auth);
+    copyBody.replaceText(<span style="">&#39;keySpeak&#39;</span>, speakersList);
+    copyBody.replaceText(<span style="">&#39;keyDelnam&#39;</span>, country);
+    copyBody.replaceText(<span style="">&#39;keyMod&#39;</span>, mod);
+    copyBody.replaceText(<span style="">&#39;keyUnmod&#39;</span>, unmod);
+    copyBody.replaceText(<span style="">&#39;keyParlipro&#39;</span>, parlipro);
+    copyBody.replaceText(<span style="">&#39;keyTact&#39;</span>, tact);
+    copyBody.replaceText(<span style="">&#39;keyPubspeak&#39;</span>, publicSpeaking);
+    copyBody.replaceText(<span style="">&#39;keyParti&#39;</span>, participation);
+    copyBody.replaceText(<span style="">&#39;keyDiplo&#39;</span>, diplomacy);
+    copyBody.replaceText(<span style="">&#39;keyBonus&#39;</span>, bonus);
+    copyBody.replaceText(<span style="">&#39;keyTotal&#39;</span>, total);
+    copyBody.replaceText(<span style="">&#39;keyComments&#39;</span>, comments);
+    
+    copyDoc.saveAndClose();
+    
+    <span style="color: #008800; font-weight: bold">var</span> idSheet <span style="color: #333333">=</span> <span style="">&quot;1jq6kbH6DkYd1F2GUalzPAEcthKqAKEx7UVAWIRNNqck&quot;</span>;
+    
+    <span style="color: #008800; font-weight: bold">if</span>(newCol <span style="color: #333333">!=</span> <span style="">&quot;&quot;</span>){
+      SpreadsheetApp.openById(idSheet).getSheetByName(<span style="">&quot;Sheet1&quot;</span>).getRange(newCol<span style="color: #333333">+</span>(i<span style="color: #333333">+</span><span style="color: #0000DD; font-weight: bold">1</span>).toString()).setValue(DelegateRubric);
+    }
+   
+    
+    SpreadsheetApp.getActiveSheet().getRange(<span style="">&quot;P&quot;</span><span style="color: #333333">+</span>i.toString()).setValue(<span style="">&quot;ID TRANSFERRED&quot;</span>);
+  
+  }
+}
+  
+</pre></td></tr></table></div>
+
+<br>
+</div>
+</body>
+</html>

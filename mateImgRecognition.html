@@ -1,0 +1,151 @@
+<!doctype html>
+<html style="height:100%;">
+<head>
+<meta charset="utf-8">
+<title>MATEImgRecognition.py | Eric Love</title>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link href="sitestyle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="navbar"> <a href="index.html" class="logo"><img src="images/PersonalLogo.png" width="629" height="630" alt=""/></a> <a href="index.html">Home</a> <a href="projects.html" >Projects</a> 
+<a href="resume.html">Resume</a>
+  <div class="dropdown">
+    <div class = "dropbtn">
+      <button class = "dropbtn">Contact </button>
+      <div class="dropdown-content"> <a href="mailto:ericlove2002@gmail.com" target="_blank">Email</a> <a href="https://www.linkedin.com/in/ericlove02" target="_blank">LinkedIn</a> <a href="contact.html">Message Me</a> </div>
+    </div>
+  </div>
+</div>
+<div style="padding-top:40px;height: 100%;
+    height: -webkit-calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: calc(100% - 40px);">
+<br>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:50%;margin:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">numpy</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">np</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">pyautogui</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">cv2</span>
+<span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">PIL</span> <span style="color: #008800; font-weight: bold">import</span> Image, ImageDraw, ImageFont
+
+pyautogui<span style="color: #333333">.</span>screenshot(<span style="">&#39;image.jpg&#39;</span>)
+
+font <span style="color: #333333">=</span> cv2<span style="color: #333333">.</span>FONT_HERSHEY_COMPLEX
+
+tri <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+rect <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+line <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+circ <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+
+img <span style="color: #333333">=</span> cv2<span style="color: #333333">.</span>imread(<span style="">&quot;image.jpg&quot;</span>, cv2<span style="color: #333333">.</span>IMREAD_GRAYSCALE)
+img <span style="color: #333333">=</span> cv2<span style="color: #333333">.</span>blur(img, (<span style="color: #0000DD; font-weight: bold">10</span>,<span style="color: #0000DD; font-weight: bold">10</span>))
+_, threshold <span style="color: #333333">=</span> cv2<span style="color: #333333">.</span>threshold(img, <span style="color: #0000DD; font-weight: bold">127</span>, <span style="color: #0000DD; font-weight: bold">255</span>, cv2<span style="color: #333333">.</span>THRESH_BINARY)
+contours, hierarchy <span style="color: #333333">=</span> cv2<span style="color: #333333">.</span>findContours(threshold, cv2<span style="color: #333333">.</span>RETR_TREE, cv2<span style="color: #333333">.</span>CHAIN_APPROX_SIMPLE)
+
+<span style="color: #008800; font-weight: bold">for</span> cnt <span style="color: #000000; font-weight: bold">in</span> contours:
+   approx <span style="color: #333333">=</span> cv2<span style="color: #333333">.</span>approxPolyDP(cnt, <span style="color: #6600EE; font-weight: bold">0.01</span><span style="color: #333333">*</span>cv2<span style="color: #333333">.</span>arcLength(cnt, <span style="color: #007020">True</span>), <span style="color: #007020">True</span>)
+   x <span style="color: #333333">=</span> approx<span style="color: #333333">.</span>ravel()[<span style="color: #0000DD; font-weight: bold">0</span>]
+   y <span style="color: #333333">=</span> approx<span style="color: #333333">.</span>ravel()[<span style="color: #0000DD; font-weight: bold">1</span>]
+   area <span style="color: #333333">=</span> cv2<span style="color: #333333">.</span>contourArea(cnt)
+   <span style="color: #008800; font-weight: bold">if</span> <span style="color: #007020">len</span>(approx) <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>:
+       <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #0000DD; font-weight: bold">100000</span> <span style="color: #333333">&gt;</span> area <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">8000</span>):
+           tri <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+   <span style="color: #008800; font-weight: bold">elif</span> <span style="color: #007020">len</span>(approx) <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span>:
+       <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #0000DD; font-weight: bold">100000</span> <span style="color: #333333">&gt;</span> area <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">8000</span>):
+           rect <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+   <span style="color: #008800; font-weight: bold">elif</span> <span style="color: #0000DD; font-weight: bold">5</span> <span style="color: #333333">&lt;=</span> <span style="color: #007020">len</span>(approx) <span style="color: #333333">&lt;=</span> <span style="color: #0000DD; font-weight: bold">6</span>:
+       <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #0000DD; font-weight: bold">100000</span> <span style="color: #333333">&gt;</span> area <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">8000</span>):
+           tri <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+       <span style="color: #008800; font-weight: bold">elif</span>(<span style="color: #007020">len</span>(approx) <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">6</span>):
+           <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #0000DD; font-weight: bold">18000</span> <span style="color: #333333">&gt;</span> area <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">1300</span>):
+               line <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+   <span style="color: #008800; font-weight: bold">elif</span> <span style="color: #0000DD; font-weight: bold">7</span> <span style="color: #333333">&lt;</span> <span style="color: #007020">len</span>(approx) <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">25</span>:
+       <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #0000DD; font-weight: bold">100000</span> <span style="color: #333333">&gt;</span> area <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">8000</span>):
+           circ <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+   <span style="color: #008800; font-weight: bold">else</span>:
+       <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #0000DD; font-weight: bold">18000</span> <span style="color: #333333">&gt;</span> area <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">1300</span>):
+           line <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+
+im <span style="color: #333333">=</span> Image<span style="color: #333333">.</span>new(<span style="">&quot;RGB&quot;</span>, (<span style="color: #0000DD; font-weight: bold">512</span>,<span style="color: #0000DD; font-weight: bold">512</span>), (<span style="color: #0000DD; font-weight: bold">255</span>,<span style="color: #0000DD; font-weight: bold">255</span>,<span style="color: #0000DD; font-weight: bold">255</span>))
+fnt <span style="color: #333333">=</span> ImageFont<span style="color: #333333">.</span>truetype(<span style="">&#39;arial.ttf&#39;</span>, <span style="color: #0000DD; font-weight: bold">40</span>)
+d <span style="color: #333333">=</span> ImageDraw<span style="color: #333333">.</span>Draw(im)
+
+d<span style="color: #333333">.</span>polygon((<span style="color: #0000DD; font-weight: bold">60</span>,<span style="color: #0000DD; font-weight: bold">10</span>,<span style="color: #0000DD; font-weight: bold">10</span>,<span style="color: #0000DD; font-weight: bold">110</span>,<span style="color: #0000DD; font-weight: bold">110</span>,<span style="color: #0000DD; font-weight: bold">110</span>),(<span style="color: #0000DD; font-weight: bold">255</span>,<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">0</span>))
+d<span style="color: #333333">.</span>rectangle((<span style="color: #0000DD; font-weight: bold">10</span>,<span style="color: #0000DD; font-weight: bold">120</span>,<span style="color: #0000DD; font-weight: bold">110</span>,<span style="color: #0000DD; font-weight: bold">220</span>),(<span style="color: #0000DD; font-weight: bold">255</span>,<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">0</span>))
+d<span style="color: #333333">.</span>line((<span style="color: #0000DD; font-weight: bold">60</span>,<span style="color: #0000DD; font-weight: bold">230</span>,<span style="color: #0000DD; font-weight: bold">60</span>,<span style="color: #0000DD; font-weight: bold">330</span>),(<span style="color: #0000DD; font-weight: bold">255</span>,<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">0</span>),<span style="color: #0000DD; font-weight: bold">20</span>)
+d<span style="color: #333333">.</span>ellipse((<span style="color: #0000DD; font-weight: bold">10</span>,<span style="color: #0000DD; font-weight: bold">340</span>,<span style="color: #0000DD; font-weight: bold">110</span>,<span style="color: #0000DD; font-weight: bold">440</span>),(<span style="color: #0000DD; font-weight: bold">255</span>,<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">0</span>))
+shapes <span style="color: #333333">=</span> [tri, rect, line, circ]
+i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span>
+
+<span style="color: #008800; font-weight: bold">while</span> i<span style="color: #333333">&lt;</span><span style="color: #0000DD; font-weight: bold">4</span>:
+   d<span style="color: #333333">.</span>text((<span style="color: #0000DD; font-weight: bold">200</span>,i<span style="color: #333333">*</span><span style="color: #0000DD; font-weight: bold">110</span><span style="color: #333333">+</span><span style="color: #0000DD; font-weight: bold">50</span>), <span style="color: #007020">str</span>(shapes[i]) , font<span style="color: #333333">=</span>fnt, fill<span style="color: #333333">=</span>(<span style="color: #0000DD; font-weight: bold">255</span>,<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">0</span>))
+   i<span style="color: #333333">+=</span><span style="color: #0000DD; font-weight: bold">1</span>
+
+im<span style="color: #333333">.</span>show()
+cv2<span style="color: #333333">.</span>waitKey(<span style="color: #0000DD; font-weight: bold">0</span>)
+cv2<span style="color: #333333">.</span>destroyAllWindows()
+</pre></td></tr></table></div>
+
+<br>
+</div>
+</body>
+</html>

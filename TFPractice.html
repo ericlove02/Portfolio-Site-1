@@ -1,0 +1,164 @@
+<!doctype html>
+<html style="height:100%;">
+<head>
+<meta charset="utf-8">
+<title>TensorFlow_Practice.py | Eric Love</title>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link href="sitestyle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="navbar"> <a href="index.html" class="logo"><img src="images/PersonalLogo.png" width="629" height="630" alt=""/></a> <a href="index.html">Home</a> <a href="projects.html" >Projects</a> 
+<a href="resume.html">Resume</a>
+  <div class="dropdown">
+    <div class = "dropbtn">
+      <button class = "dropbtn">Contact </button>
+      <div class="dropdown-content"> <a href="mailto:ericlove2002@gmail.com" target="_blank">Email</a> <a href="https://www.linkedin.com/in/ericlove02" target="_blank">LinkedIn</a> <a href="contact.html">Message Me</a> </div>
+    </div>
+  </div>
+</div>
+<div style="padding-top:40px;height: 100%;
+    height: -webkit-calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: calc(100% - 40px);">
+    <br>
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:50%;margin:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #888888">#</span>
+<span style="color: #888888">#  This is a simple python file I have saved from when I was learning how to use the TensorFlow library</span>
+<span style="color: #888888">#</span>
+<span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">__future__</span> <span style="color: #008800; font-weight: bold">import</span> absolute_import, division, print_function, unicode_literals
+
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">numpy</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">np</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">pandas</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">pd</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">plt</span>
+<span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">IPython.display</span> <span style="color: #008800; font-weight: bold">import</span> clear_output
+<span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">six.moves</span> <span style="color: #008800; font-weight: bold">import</span> urllib
+
+<span style="color: #888888">## import tensorflow.compat.v2.feature_column as fc</span>
+
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">tensorflow</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">tf</span>
+
+<span style="color: #008800; font-weight: bold">print</span>(tf<span style="color: #333333">.</span>version)
+
+dftrain <span style="color: #333333">=</span> pd<span style="color: #333333">.</span>read_csv(<span style="">&#39;https://storage.googleapis.com/tf-datasets/titanic/train.csv&#39;</span>)  <span style="color: #888888"># training data</span>
+dfeval <span style="color: #333333">=</span> pd<span style="color: #333333">.</span>read_csv(<span style="">&#39;https://storage.googleapis.com/tf-datasets/titanic/eval.csv&#39;</span>)  <span style="color: #888888"># testing data</span>
+y_train <span style="color: #333333">=</span> dftrain<span style="color: #333333">.</span>pop(<span style="">&#39;survived&#39;</span>)
+y_eval <span style="color: #333333">=</span> dfeval<span style="color: #333333">.</span>pop(<span style="">&#39;survived&#39;</span>)
+CATEGORICAL_COLUMNS <span style="color: #333333">=</span> [<span style="">&#39;sex&#39;</span>, <span style="">&#39;n_siblings_spouses&#39;</span>, <span style="">&#39;parch&#39;</span>, <span style="">&#39;class&#39;</span>, <span style="">&#39;deck&#39;</span>,
+                       <span style="">&#39;embark_town&#39;</span>, <span style="">&#39;alone&#39;</span>]
+NUMERIC_COLUMNS <span style="color: #333333">=</span> [<span style="">&#39;age&#39;</span>, <span style="">&#39;fare&#39;</span>]
+
+feature_columns <span style="color: #333333">=</span> []
+<span style="color: #008800; font-weight: bold">for</span> feature_name <span style="color: #000000; font-weight: bold">in</span> CATEGORICAL_COLUMNS:
+  vocabulary <span style="color: #333333">=</span> dftrain[feature_name]<span style="color: #333333">.</span>unique()  <span style="color: #888888"># gets a list of all unique values from given feature column</span>
+  feature_columns<span style="color: #333333">.</span>append(tf<span style="color: #333333">.</span>feature_column<span style="color: #333333">.</span>categorical_column_with_vocabulary_list(feature_name, vocabulary))
+
+<span style="color: #008800; font-weight: bold">for</span> feature_name <span style="color: #000000; font-weight: bold">in</span> NUMERIC_COLUMNS:
+  feature_columns<span style="color: #333333">.</span>append(tf<span style="color: #333333">.</span>feature_column<span style="color: #333333">.</span>numeric_column(feature_name, dtype<span style="color: #333333">=</span>tf<span style="color: #333333">.</span>float32))
+
+<span style="color: #008800; font-weight: bold">print</span>(feature_columns)
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">make_input_fn</span>(data_df, label_df, num_epochs<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">10</span>, shuffle<span style="color: #333333">=</span><span style="color: #007020">True</span>, batch_size<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">32</span>):
+  <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">input_function</span>():  <span style="color: #888888"># inner function, this will be returned</span>
+    ds <span style="color: #333333">=</span> tf<span style="color: #333333">.</span>data<span style="color: #333333">.</span>Dataset<span style="color: #333333">.</span>from_tensor_slices((<span style="color: #007020">dict</span>(data_df), label_df))  <span style="color: #888888"># create tf.data.Dataset object with data and its label</span>
+    <span style="color: #008800; font-weight: bold">if</span> shuffle:
+      ds <span style="color: #333333">=</span> ds<span style="color: #333333">.</span>shuffle(<span style="color: #0000DD; font-weight: bold">1000</span>)  <span style="color: #888888"># randomize order of data</span>
+    ds <span style="color: #333333">=</span> ds<span style="color: #333333">.</span>batch(batch_size)<span style="color: #333333">.</span>repeat(num_epochs)  <span style="color: #888888"># split dataset into batches of 32 and repeat process for number of epochs</span>
+    <span style="color: #008800; font-weight: bold">return</span> ds  <span style="color: #888888"># return a batch of the dataset</span>
+  <span style="color: #008800; font-weight: bold">return</span> input_function  <span style="color: #888888"># return a function object for use</span>
+
+train_input_fn <span style="color: #333333">=</span> make_input_fn(dftrain, y_train)  <span style="color: #888888"># call the input_function that was returned to get a dataset object to feed to the model</span>
+eval_input_fn <span style="color: #333333">=</span> make_input_fn(dfeval, y_eval, num_epochs<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">1</span>, shuffle<span style="color: #333333">=</span><span style="color: #007020">False</span>)
+
+linear_est <span style="color: #333333">=</span> tf<span style="color: #333333">.</span>estimator<span style="color: #333333">.</span>LinearClassifier(feature_columns<span style="color: #333333">=</span>feature_columns)
+
+linear_est<span style="color: #333333">.</span>train(train_input_fn)  <span style="color: #888888"># train</span>
+result <span style="color: #333333">=</span> linear_est<span style="color: #333333">.</span>evaluate(eval_input_fn)  <span style="color: #888888"># get model metrics/stats by testing on tetsing data</span>
+
+clear_output()  <span style="color: #888888"># clears consoke output</span>
+<span style="color: #008800; font-weight: bold">print</span>(result[<span style="">&#39;accuracy&#39;</span>])  <span style="color: #888888"># the result variable is simply a dict of stats about our model</span>
+
+pred_dicts <span style="color: #333333">=</span> <span style="color: #007020">list</span>(linear_est<span style="color: #333333">.</span>predict(eval_input_fn))
+probs <span style="color: #333333">=</span> pd<span style="color: #333333">.</span>Series([pred[<span style="">&#39;probabilities&#39;</span>][<span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #008800; font-weight: bold">for</span> pred <span style="color: #000000; font-weight: bold">in</span> pred_dicts])
+
+probs<span style="color: #333333">.</span>plot(kind<span style="color: #333333">=</span><span style="">&#39;hist&#39;</span>, bins<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">20</span>, title<span style="color: #333333">=</span><span style="">&#39;predicted probabilities&#39;</span>)
+
+<span style="color: #008800; font-weight: bold">print</span>(result)
+
+result <span style="color: #333333">=</span> <span style="color: #007020">list</span>(linear_est<span style="color: #333333">.</span>predict(eval_input_fn))
+
+<span style="color: #008800; font-weight: bold">print</span>(dfeval<span style="color: #333333">.</span>loc[<span style="color: #0000DD; font-weight: bold">5</span>])
+
+<span style="color: #008800; font-weight: bold">print</span>(result[<span style="color: #0000DD; font-weight: bold">5</span>][<span style="">&#39;probabilities&#39;</span>][<span style="color: #0000DD; font-weight: bold">1</span>])
+</pre></td></tr></table></div>
+
+<br>
+</div>
+</body>
+</html>

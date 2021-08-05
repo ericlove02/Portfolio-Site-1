@@ -1,0 +1,2154 @@
+<!doctype html>
+<html style="height:100%;">
+<head>
+<meta charset="utf-8">
+<title>PVent.ino | Eric Love</title>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link href="sitestyle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="navbar"> <a href="index.html" class="logo"><img src="images/PersonalLogo.png" width="629" height="630" alt=""/></a> <a href="index.html">Home</a> <a href="projects.html" >Projects</a> 
+<a href="resume.html">Resume</a>
+  <div class="dropdown">
+    <div class = "dropbtn">
+      <button class = "dropbtn">Contact </button>
+      <div class="dropdown-content"> <a href="mailto:ericlove2002@gmail.com" target="_blank">Email</a> <a href="https://www.linkedin.com/in/ericlove02" target="_blank">LinkedIn</a> <a href="contact.html">Message Me</a> </div>
+    </div>
+  </div>
+</div>
+<div style="padding-top:40px;height: 100%;
+    height: -webkit-calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: calc(100% - 40px);">
+    <br>
+<!-- HTML generated using hilite.me --><div style=" background: #ffffff; overflow:auto;width:50%;margin:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">   1
+   2
+   3
+   4
+   5
+   6
+   7
+   8
+   9
+  10
+  11
+  12
+  13
+  14
+  15
+  16
+  17
+  18
+  19
+  20
+  21
+  22
+  23
+  24
+  25
+  26
+  27
+  28
+  29
+  30
+  31
+  32
+  33
+  34
+  35
+  36
+  37
+  38
+  39
+  40
+  41
+  42
+  43
+  44
+  45
+  46
+  47
+  48
+  49
+  50
+  51
+  52
+  53
+  54
+  55
+  56
+  57
+  58
+  59
+  60
+  61
+  62
+  63
+  64
+  65
+  66
+  67
+  68
+  69
+  70
+  71
+  72
+  73
+  74
+  75
+  76
+  77
+  78
+  79
+  80
+  81
+  82
+  83
+  84
+  85
+  86
+  87
+  88
+  89
+  90
+  91
+  92
+  93
+  94
+  95
+  96
+  97
+  98
+  99
+ 100
+ 101
+ 102
+ 103
+ 104
+ 105
+ 106
+ 107
+ 108
+ 109
+ 110
+ 111
+ 112
+ 113
+ 114
+ 115
+ 116
+ 117
+ 118
+ 119
+ 120
+ 121
+ 122
+ 123
+ 124
+ 125
+ 126
+ 127
+ 128
+ 129
+ 130
+ 131
+ 132
+ 133
+ 134
+ 135
+ 136
+ 137
+ 138
+ 139
+ 140
+ 141
+ 142
+ 143
+ 144
+ 145
+ 146
+ 147
+ 148
+ 149
+ 150
+ 151
+ 152
+ 153
+ 154
+ 155
+ 156
+ 157
+ 158
+ 159
+ 160
+ 161
+ 162
+ 163
+ 164
+ 165
+ 166
+ 167
+ 168
+ 169
+ 170
+ 171
+ 172
+ 173
+ 174
+ 175
+ 176
+ 177
+ 178
+ 179
+ 180
+ 181
+ 182
+ 183
+ 184
+ 185
+ 186
+ 187
+ 188
+ 189
+ 190
+ 191
+ 192
+ 193
+ 194
+ 195
+ 196
+ 197
+ 198
+ 199
+ 200
+ 201
+ 202
+ 203
+ 204
+ 205
+ 206
+ 207
+ 208
+ 209
+ 210
+ 211
+ 212
+ 213
+ 214
+ 215
+ 216
+ 217
+ 218
+ 219
+ 220
+ 221
+ 222
+ 223
+ 224
+ 225
+ 226
+ 227
+ 228
+ 229
+ 230
+ 231
+ 232
+ 233
+ 234
+ 235
+ 236
+ 237
+ 238
+ 239
+ 240
+ 241
+ 242
+ 243
+ 244
+ 245
+ 246
+ 247
+ 248
+ 249
+ 250
+ 251
+ 252
+ 253
+ 254
+ 255
+ 256
+ 257
+ 258
+ 259
+ 260
+ 261
+ 262
+ 263
+ 264
+ 265
+ 266
+ 267
+ 268
+ 269
+ 270
+ 271
+ 272
+ 273
+ 274
+ 275
+ 276
+ 277
+ 278
+ 279
+ 280
+ 281
+ 282
+ 283
+ 284
+ 285
+ 286
+ 287
+ 288
+ 289
+ 290
+ 291
+ 292
+ 293
+ 294
+ 295
+ 296
+ 297
+ 298
+ 299
+ 300
+ 301
+ 302
+ 303
+ 304
+ 305
+ 306
+ 307
+ 308
+ 309
+ 310
+ 311
+ 312
+ 313
+ 314
+ 315
+ 316
+ 317
+ 318
+ 319
+ 320
+ 321
+ 322
+ 323
+ 324
+ 325
+ 326
+ 327
+ 328
+ 329
+ 330
+ 331
+ 332
+ 333
+ 334
+ 335
+ 336
+ 337
+ 338
+ 339
+ 340
+ 341
+ 342
+ 343
+ 344
+ 345
+ 346
+ 347
+ 348
+ 349
+ 350
+ 351
+ 352
+ 353
+ 354
+ 355
+ 356
+ 357
+ 358
+ 359
+ 360
+ 361
+ 362
+ 363
+ 364
+ 365
+ 366
+ 367
+ 368
+ 369
+ 370
+ 371
+ 372
+ 373
+ 374
+ 375
+ 376
+ 377
+ 378
+ 379
+ 380
+ 381
+ 382
+ 383
+ 384
+ 385
+ 386
+ 387
+ 388
+ 389
+ 390
+ 391
+ 392
+ 393
+ 394
+ 395
+ 396
+ 397
+ 398
+ 399
+ 400
+ 401
+ 402
+ 403
+ 404
+ 405
+ 406
+ 407
+ 408
+ 409
+ 410
+ 411
+ 412
+ 413
+ 414
+ 415
+ 416
+ 417
+ 418
+ 419
+ 420
+ 421
+ 422
+ 423
+ 424
+ 425
+ 426
+ 427
+ 428
+ 429
+ 430
+ 431
+ 432
+ 433
+ 434
+ 435
+ 436
+ 437
+ 438
+ 439
+ 440
+ 441
+ 442
+ 443
+ 444
+ 445
+ 446
+ 447
+ 448
+ 449
+ 450
+ 451
+ 452
+ 453
+ 454
+ 455
+ 456
+ 457
+ 458
+ 459
+ 460
+ 461
+ 462
+ 463
+ 464
+ 465
+ 466
+ 467
+ 468
+ 469
+ 470
+ 471
+ 472
+ 473
+ 474
+ 475
+ 476
+ 477
+ 478
+ 479
+ 480
+ 481
+ 482
+ 483
+ 484
+ 485
+ 486
+ 487
+ 488
+ 489
+ 490
+ 491
+ 492
+ 493
+ 494
+ 495
+ 496
+ 497
+ 498
+ 499
+ 500
+ 501
+ 502
+ 503
+ 504
+ 505
+ 506
+ 507
+ 508
+ 509
+ 510
+ 511
+ 512
+ 513
+ 514
+ 515
+ 516
+ 517
+ 518
+ 519
+ 520
+ 521
+ 522
+ 523
+ 524
+ 525
+ 526
+ 527
+ 528
+ 529
+ 530
+ 531
+ 532
+ 533
+ 534
+ 535
+ 536
+ 537
+ 538
+ 539
+ 540
+ 541
+ 542
+ 543
+ 544
+ 545
+ 546
+ 547
+ 548
+ 549
+ 550
+ 551
+ 552
+ 553
+ 554
+ 555
+ 556
+ 557
+ 558
+ 559
+ 560
+ 561
+ 562
+ 563
+ 564
+ 565
+ 566
+ 567
+ 568
+ 569
+ 570
+ 571
+ 572
+ 573
+ 574
+ 575
+ 576
+ 577
+ 578
+ 579
+ 580
+ 581
+ 582
+ 583
+ 584
+ 585
+ 586
+ 587
+ 588
+ 589
+ 590
+ 591
+ 592
+ 593
+ 594
+ 595
+ 596
+ 597
+ 598
+ 599
+ 600
+ 601
+ 602
+ 603
+ 604
+ 605
+ 606
+ 607
+ 608
+ 609
+ 610
+ 611
+ 612
+ 613
+ 614
+ 615
+ 616
+ 617
+ 618
+ 619
+ 620
+ 621
+ 622
+ 623
+ 624
+ 625
+ 626
+ 627
+ 628
+ 629
+ 630
+ 631
+ 632
+ 633
+ 634
+ 635
+ 636
+ 637
+ 638
+ 639
+ 640
+ 641
+ 642
+ 643
+ 644
+ 645
+ 646
+ 647
+ 648
+ 649
+ 650
+ 651
+ 652
+ 653
+ 654
+ 655
+ 656
+ 657
+ 658
+ 659
+ 660
+ 661
+ 662
+ 663
+ 664
+ 665
+ 666
+ 667
+ 668
+ 669
+ 670
+ 671
+ 672
+ 673
+ 674
+ 675
+ 676
+ 677
+ 678
+ 679
+ 680
+ 681
+ 682
+ 683
+ 684
+ 685
+ 686
+ 687
+ 688
+ 689
+ 690
+ 691
+ 692
+ 693
+ 694
+ 695
+ 696
+ 697
+ 698
+ 699
+ 700
+ 701
+ 702
+ 703
+ 704
+ 705
+ 706
+ 707
+ 708
+ 709
+ 710
+ 711
+ 712
+ 713
+ 714
+ 715
+ 716
+ 717
+ 718
+ 719
+ 720
+ 721
+ 722
+ 723
+ 724
+ 725
+ 726
+ 727
+ 728
+ 729
+ 730
+ 731
+ 732
+ 733
+ 734
+ 735
+ 736
+ 737
+ 738
+ 739
+ 740
+ 741
+ 742
+ 743
+ 744
+ 745
+ 746
+ 747
+ 748
+ 749
+ 750
+ 751
+ 752
+ 753
+ 754
+ 755
+ 756
+ 757
+ 758
+ 759
+ 760
+ 761
+ 762
+ 763
+ 764
+ 765
+ 766
+ 767
+ 768
+ 769
+ 770
+ 771
+ 772
+ 773
+ 774
+ 775
+ 776
+ 777
+ 778
+ 779
+ 780
+ 781
+ 782
+ 783
+ 784
+ 785
+ 786
+ 787
+ 788
+ 789
+ 790
+ 791
+ 792
+ 793
+ 794
+ 795
+ 796
+ 797
+ 798
+ 799
+ 800
+ 801
+ 802
+ 803
+ 804
+ 805
+ 806
+ 807
+ 808
+ 809
+ 810
+ 811
+ 812
+ 813
+ 814
+ 815
+ 816
+ 817
+ 818
+ 819
+ 820
+ 821
+ 822
+ 823
+ 824
+ 825
+ 826
+ 827
+ 828
+ 829
+ 830
+ 831
+ 832
+ 833
+ 834
+ 835
+ 836
+ 837
+ 838
+ 839
+ 840
+ 841
+ 842
+ 843
+ 844
+ 845
+ 846
+ 847
+ 848
+ 849
+ 850
+ 851
+ 852
+ 853
+ 854
+ 855
+ 856
+ 857
+ 858
+ 859
+ 860
+ 861
+ 862
+ 863
+ 864
+ 865
+ 866
+ 867
+ 868
+ 869
+ 870
+ 871
+ 872
+ 873
+ 874
+ 875
+ 876
+ 877
+ 878
+ 879
+ 880
+ 881
+ 882
+ 883
+ 884
+ 885
+ 886
+ 887
+ 888
+ 889
+ 890
+ 891
+ 892
+ 893
+ 894
+ 895
+ 896
+ 897
+ 898
+ 899
+ 900
+ 901
+ 902
+ 903
+ 904
+ 905
+ 906
+ 907
+ 908
+ 909
+ 910
+ 911
+ 912
+ 913
+ 914
+ 915
+ 916
+ 917
+ 918
+ 919
+ 920
+ 921
+ 922
+ 923
+ 924
+ 925
+ 926
+ 927
+ 928
+ 929
+ 930
+ 931
+ 932
+ 933
+ 934
+ 935
+ 936
+ 937
+ 938
+ 939
+ 940
+ 941
+ 942
+ 943
+ 944
+ 945
+ 946
+ 947
+ 948
+ 949
+ 950
+ 951
+ 952
+ 953
+ 954
+ 955
+ 956
+ 957
+ 958
+ 959
+ 960
+ 961
+ 962
+ 963
+ 964
+ 965
+ 966
+ 967
+ 968
+ 969
+ 970
+ 971
+ 972
+ 973
+ 974
+ 975
+ 976
+ 977
+ 978
+ 979
+ 980
+ 981
+ 982
+ 983
+ 984
+ 985
+ 986
+ 987
+ 988
+ 989
+ 990
+ 991
+ 992
+ 993
+ 994
+ 995
+ 996
+ 997
+ 998
+ 999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+1010
+1011
+1012
+1013
+1014
+1015
+1016
+1017
+1018
+1019
+1020
+1021
+1022
+1023
+1024
+1025
+1026
+1027
+1028
+1029
+1030
+1031
+1032
+1033
+1034
+1035
+1036
+1037
+1038
+1039
+1040
+1041
+1042
+1043
+1044
+1045
+1046
+1047
+1048
+1049
+1050
+1051
+1052
+1053
+1054
+1055
+1056
+1057
+1058
+1059
+1060
+1061
+1062
+1063</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #888888">/*</span>
+<span style="color: #888888"> * PVent.ino</span>
+<span style="color: #888888"> */</span>
+
+<span style="color: #888888">//direction values</span>
+<span style="color: #557799">#define INH 1</span>
+<span style="color: #557799">#define EXH -1</span>
+
+<span style="color: #557799">#define SET_LOW(x,y) (x&amp;=(~(1&lt;&lt;y)))</span>
+<span style="color: #557799">#define SET_HIGH(x,y) (x|=(1&lt;&lt;y))</span>
+
+<span style="color: #888888">//* PORTD</span>
+<span style="color: #557799">#define D0  0</span>
+<span style="color: #557799">#define D1  1</span>
+<span style="color: #557799">#define D2  2</span>
+<span style="color: #557799">#define D3  3 </span><span style="color: #888888">// ON A TIMER</span>
+<span style="color: #557799">#define D4  4</span>
+<span style="color: #557799">#define D5  5 </span><span style="color: #888888">// ON A TIMER</span>
+<span style="color: #557799">#define D6  6 </span><span style="color: #888888">// ON A TIMER</span>
+<span style="color: #557799">#define D7  7</span>
+<span style="color: #888888">//* PORTB</span>
+<span style="color: #557799">#define D8  0</span>
+<span style="color: #557799">#define D9  1 </span><span style="color: #888888">// ON A TIMER</span>
+<span style="color: #557799">#define D10  2 </span><span style="color: #888888">// ON A TIMER</span>
+<span style="color: #557799">#define D11  3 </span><span style="color: #888888">// ON A TIMER</span>
+<span style="color: #557799">#define D12  4</span>
+<span style="color: #557799">#define D13  5</span>
+
+<span style="color: #888888">/********* CONFIGURATION *********/</span>
+<span style="color: #888888">//all configurable values should be defined here</span>
+<span style="color: #557799">#define MAX_STEPS 275 </span><span style="color: #888888">//the max number of int steps motor can run without physically breaking the system</span>
+<span style="color: #557799">#define MICROSTEP 1 </span><span style="color: #888888">// driver = 1/rev microsteps</span>
+<span style="color: #557799">#define MAX_MICROSTEPS (MAX_STEPS * MICROSTEP)</span>
+
+<span style="color: #557799">#define DEBUG 1 </span><span style="color: #888888">//0=off, 1=on. enables serial output and any other debug stuff.</span>
+<span style="color: #557799">#define BAUD_RATE 9600</span>
+
+<span style="color: #333399; font-weight: bold">double</span> pressureWarning <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">3.5</span>;
+<span style="color: #333399; font-weight: bold">int</span> resStartBPM <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">20</span>;
+
+<span style="color: #008800; font-weight: bold">const</span> <span style="color: #333399; font-weight: bold">int</span> homeSwitch <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">7</span>; <span style="color: #888888">//limit switch</span>
+<span style="color: #008800; font-weight: bold">const</span> <span style="color: #333399; font-weight: bold">int</span> dir_pin <span style="color: #333333">=</span> D8;
+<span style="color: #008800; font-weight: bold">const</span> <span style="color: #333399; font-weight: bold">int</span> step_pin <span style="color: #333333">=</span> D9;
+<span style="color: #008800; font-weight: bold">const</span> <span style="color: #333399; font-weight: bold">int</span> pressurePin <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+<span style="color: #008800; font-weight: bold">const</span> <span style="color: #333399; font-weight: bold">int</span> buzzerPin <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">13</span>;
+
+<span style="color: #888888">//pot minimum values</span>
+<span style="color: #888888">//if the pot is lower than these values, do something else, i.e. turn off, responsive breathing, etc.</span>
+<span style="color: #557799">#define MIN_BPM 6 </span><span style="color: #888888">//when under responsive breathing. //TODO: responsive breathing</span>
+<span style="color: #557799">#define MAX_BPM 60</span>
+
+<span style="color: #888888">/********* END CONFIGURATION *********/</span>
+
+<span style="color: #557799">#include &lt;LiquidCrystal_I2C.h&gt;</span>
+<span style="color: #557799">#include &lt;Wire.h&gt;</span>
+<span style="color: #557799">#include &lt;RotaryEncoder.h&gt;</span>
+
+<span style="color: #333399; font-weight: bold">int</span> selectedRow <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+String currentMenu <span style="color: #333333">=</span> <span style="">&quot;mode&quot;</span>;
+<span style="color: #333399; font-weight: bold">int</span> submenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+<span style="color: #333399; font-weight: bold">int</span> rowsInMenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">2</span>;
+<span style="color: #333399; font-weight: bold">int</span> prevSelectedRow;
+boolean cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+<span style="color: #333399; font-weight: bold">int</span> prevSubmenu;
+
+<span style="color: #008800; font-weight: bold">const</span> <span style="color: #333399; font-weight: bold">int</span> potButton <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">5</span>;
+<span style="color: #333399; font-weight: bold">int</span> buttonState;
+<span style="color: #333399; font-weight: bold">int</span> lastButtonState <span style="color: #333333">=</span> HIGH;
+<span style="color: #333399; font-weight: bold">unsigned</span> <span style="color: #333399; font-weight: bold">long</span> lastDebounceTime <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+<span style="color: #333399; font-weight: bold">unsigned</span> <span style="color: #333399; font-weight: bold">long</span> debounceDelay <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">50</span>;
+boolean buttonClicked;
+boolean buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+
+<span style="color: #333399; font-weight: bold">int</span> stepsPerHalfBreath <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">20</span>;
+<span style="color: #333399; font-weight: bold">double</span> ItoE <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+<span style="color: #333399; font-weight: bold">int</span> breathsPerMinute <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">20</span>;
+<span style="color: #333399; font-weight: bold">int</span> peep <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">5</span>;
+<span style="color: #333399; font-weight: bold">int</span> dir <span style="color: #333333">=</span> EXH;
+
+<span style="color: #333399; font-weight: bold">int</span> rawPressure;
+<span style="color: #333399; font-weight: bold">double</span> pressureOffset <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">51.0</span>;
+<span style="color: #333399; font-weight: bold">double</span> pressureFull <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">1023.0</span>;
+<span style="color: #333399; font-weight: bold">double</span> pressure;
+<span style="color: #333399; font-weight: bold">double</span> pressureConverted;
+
+<span style="color: #333399; font-weight: bold">int</span> lastBpm <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+<span style="color: #333399; font-weight: bold">int</span> lastStep <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+<span style="color: #333399; font-weight: bold">int</span> lastIE <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+<span style="color: #333399; font-weight: bold">bool</span> breathEnabled <span style="color: #333333">=</span> <span style="color: #007020">true</span>; <span style="color: #888888">// for responsive ONLY</span>
+<span style="color: #333399; font-weight: bold">int</span> setSteps <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+
+<span style="color: #008800; font-weight: bold">volatile</span> <span style="color: #333399; font-weight: bold">uint16_t</span> compare_time <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">113</span>;
+
+<span style="color: #333399; font-weight: bold">unsigned</span> <span style="color: #333399; font-weight: bold">long</span> speed;
+<span style="color: #333399; font-weight: bold">unsigned</span> <span style="color: #333399; font-weight: bold">long</span> NextTime <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+<span style="color: #333399; font-weight: bold">int</span> PulseStatus <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+<span style="color: #008800; font-weight: bold">volatile</span> <span style="color: #333399; font-weight: bold">int</span> halfStepsElapsed <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+
+<span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">timerOn</span>() {
+  TCCR1B <span style="color: #333333">|=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> CS12);
+  TCCR1B <span style="color: #333333">&amp;=</span> <span style="color: #333333">~</span>(<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> CS11);
+  TCCR1B <span style="color: #333333">&amp;=</span> <span style="color: #333333">~</span>(<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> CS10);
+}
+<span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">timerOff</span>() {
+  TCCR1B <span style="color: #333333">&amp;=</span> <span style="color: #333333">~</span>(<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> CS12);
+  TCCR1B <span style="color: #333333">&amp;=</span> <span style="color: #333333">~</span>(<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> CS11);
+  TCCR1B <span style="color: #333333">&amp;=</span> <span style="color: #333333">~</span>(<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> CS10);
+}
+
+RotaryEncoder <span style="color: #0066BB; font-weight: bold">encoder</span>(A2, A3);
+LiquidCrystal_I2C <span style="color: #0066BB; font-weight: bold">lcd</span>(<span style="color: #005588; font-weight: bold">0x27</span>, <span style="color: #0000DD; font-weight: bold">16</span>, <span style="color: #0000DD; font-weight: bold">2</span>);
+
+<span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">mandatoryMode</span>() {
+  <span style="color: #333399; font-weight: bold">long</span> stepsPerMin <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">2.0</span> <span style="color: #333333">*</span> <span style="color: #333399; font-weight: bold">long</span>(stepsPerHalfBreath) <span style="color: #333333">*</span> <span style="color: #333399; font-weight: bold">long</span>(breathsPerMinute);
+  <span style="color: #333399; font-weight: bold">double</span> stepsPerSec <span style="color: #333333">=</span> stepsPerMin <span style="color: #333333">/</span> <span style="color: #6600EE; font-weight: bold">60.0</span>;
+  <span style="color: #333399; font-weight: bold">double</span> newSpeed <span style="color: #333333">=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">/</span> stepsPerSec); <span style="color: #888888">//seconds per step. not really a speed more like inverse of speed. The time for how long one step should take.</span>
+  <span style="color: #008800; font-weight: bold">if</span> (ItoE <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+    <span style="color: #333399; font-weight: bold">double</span> timePerOneBreath <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">60.0</span> <span style="color: #333333">/</span> breathsPerMinute;
+    <span style="color: #333399; font-weight: bold">double</span> timeExhale <span style="color: #333333">=</span> (timePerOneBreath <span style="color: #333333">*</span> ItoE) <span style="color: #333333">/</span> (<span style="color: #6600EE; font-weight: bold">1.0</span> <span style="color: #333333">+</span> ItoE);
+
+    <span style="color: #333399; font-weight: bold">double</span> timeInhale <span style="color: #333333">=</span> timePerOneBreath <span style="color: #333333">-</span> timeExhale;
+    <span style="color: #333399; font-weight: bold">double</span> newStepsPerSec;
+    <span style="color: #008800; font-weight: bold">if</span> (dir <span style="color: #333333">==</span> INH) {
+      newStepsPerSec <span style="color: #333333">=</span> (timePerOneBreath <span style="color: #333333">*</span> stepsPerSec) <span style="color: #333333">/</span> (<span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #333333">*</span> timeInhale);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> {
+      newStepsPerSec <span style="color: #333333">=</span> (timePerOneBreath <span style="color: #333333">*</span> stepsPerSec) <span style="color: #333333">/</span> (<span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #333333">*</span> timeExhale);
+    }
+    newSpeed <span style="color: #333333">=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">/</span> newStepsPerSec);
+  }
+  <span style="color: #008800; font-weight: bold">if</span> (newSpeed <span style="color: #333333">&lt;=</span> <span style="color: #6600EE; font-weight: bold">.002</span>)
+    newSpeed <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">.002</span>; <span style="color: #888888">//? ERICS ItoE FIX!</span>
+  compare_time <span style="color: #333333">=</span> newSpeed <span style="color: #333333">*</span> <span style="color: #6600EE; font-weight: bold">16e6</span> <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">256</span> <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">2</span>;
+
+  <span style="color: #008800; font-weight: bold">if</span> (dir <span style="color: #333333">==</span> INH <span style="color: #333333">&amp;&amp;</span> halfStepsElapsed <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #333333">&gt;=</span> stepsPerHalfBreath) {
+    halfStepsElapsed <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+    SET_HIGH(PORTB, dir_pin); <span style="color: #888888">// digitalWrite(dir_pin, HIGH);</span>
+    dir <span style="color: #333333">=</span> EXH;
+  }
+  <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (dir <span style="color: #333333">==</span> EXH <span style="color: #333333">&amp;&amp;</span> <span style="color: #333333">!</span>digitalRead(homeSwitch)) {
+    halfStepsElapsed <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+    SET_LOW(PORTB, dir_pin); <span style="color: #888888">// digitalWrite(dir_pin, LOW);</span>
+    dir <span style="color: #333333">=</span> INH;
+  }
+}
+
+<span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">responsiveMode</span>() {
+  <span style="color: #333399; font-weight: bold">long</span> stepsPerMin <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">2.0</span> <span style="color: #333333">*</span> <span style="color: #333399; font-weight: bold">long</span>(stepsPerHalfBreath) <span style="color: #333333">*</span> <span style="color: #333399; font-weight: bold">long</span>(breathsPerMinute);
+  <span style="color: #333399; font-weight: bold">double</span> stepsPerSec <span style="color: #333333">=</span> stepsPerMin <span style="color: #333333">/</span> <span style="color: #6600EE; font-weight: bold">60.0</span>;
+  <span style="color: #333399; font-weight: bold">double</span> newSpeed <span style="color: #333333">=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">/</span> stepsPerSec); <span style="color: #888888">//seconds per step. not really a speed more like inverse of speed. The time for how long one step should take.</span>
+
+  <span style="color: #008800; font-weight: bold">if</span> (ItoE <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+    <span style="color: #333399; font-weight: bold">double</span> timePerOneBreath <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">60.0</span> <span style="color: #333333">/</span> breathsPerMinute;
+    <span style="color: #333399; font-weight: bold">double</span> timeExhale <span style="color: #333333">=</span> (timePerOneBreath <span style="color: #333333">*</span> ItoE) <span style="color: #333333">/</span> (<span style="color: #6600EE; font-weight: bold">1.0</span> <span style="color: #333333">+</span> ItoE);
+
+    <span style="color: #333399; font-weight: bold">double</span> timeInhale <span style="color: #333333">=</span> timePerOneBreath <span style="color: #333333">-</span> timeExhale;
+    <span style="color: #333399; font-weight: bold">double</span> newStepsPerSec;
+    <span style="color: #008800; font-weight: bold">if</span> (dir <span style="color: #333333">==</span> INH) {
+      newStepsPerSec <span style="color: #333333">=</span> (timePerOneBreath <span style="color: #333333">*</span> stepsPerSec) <span style="color: #333333">/</span> (<span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #333333">*</span> timeInhale);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> {
+      newStepsPerSec <span style="color: #333333">=</span> (timePerOneBreath <span style="color: #333333">*</span> stepsPerSec) <span style="color: #333333">/</span> (<span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #333333">*</span> timeExhale);
+    }
+    newSpeed <span style="color: #333333">=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">/</span> newStepsPerSec);
+  }
+  <span style="color: #008800; font-weight: bold">if</span> (newSpeed <span style="color: #333333">&lt;=</span> <span style="color: #6600EE; font-weight: bold">.002</span>)
+    newSpeed <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">.002</span>; <span style="color: #888888">//? ERICS ItoE FIX!</span>
+  compare_time <span style="color: #333333">=</span> newSpeed <span style="color: #333333">*</span> <span style="color: #6600EE; font-weight: bold">16e6</span> <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">256</span> <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">2</span>;
+
+  <span style="color: #008800; font-weight: bold">if</span> (dir <span style="color: #333333">==</span> INH <span style="color: #333333">&amp;&amp;</span> halfStepsElapsed <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #333333">&gt;=</span> stepsPerHalfBreath <span style="color: #333333">&amp;&amp;</span> breathEnabled) {
+    halfStepsElapsed <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+    SET_HIGH(PORTB, dir_pin); <span style="color: #888888">// digitalWrite(dir_pin, HIGH);</span>
+    dir <span style="color: #333333">=</span> EXH;
+    setSteps <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+  }
+  <span style="color: #008800; font-weight: bold">if</span> (dir <span style="color: #333333">==</span> EXH <span style="color: #333333">&amp;&amp;</span> <span style="color: #333333">!</span>digitalRead(homeSwitch) <span style="color: #333333">&amp;&amp;</span> breathEnabled) {
+    halfStepsElapsed <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+    SET_LOW(PORTB, dir_pin); <span style="color: #888888">// digitalWrite(dir_pin, LOW);</span>
+    dir <span style="color: #333333">=</span> INH;
+    breathEnabled <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+    timerOff();
+  }
+  <span style="color: #888888">//println(&quot;Pressure con: &quot; + String(pressureConverted));</span>
+  <span style="color: #008800; font-weight: bold">if</span> (pressureConverted <span style="color: #333333">&lt;</span> peep <span style="color: #333333">&amp;&amp;</span> (peep <span style="color: #333333">-</span> pressureConverted) <span style="color: #333333">&gt;=</span> <span style="color: #6600EE; font-weight: bold">1.5</span> <span style="color: #333333">&amp;&amp;</span> <span style="color: #333333">!</span>breathEnabled) {
+    breathEnabled <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+    timerOn();
+  }
+
+  <span style="color: #888888">/*  Monitor patient pressure, pressure will stay at one number until</span>
+<span style="color: #888888">     volume in patient lungs increases to go for a breath</span>
+<span style="color: #888888">      Once pressure drops below user set peep -&gt; begin INH of size user set volume(steps)</span>
+<span style="color: #888888">      EXH following the i:e ratio</span>
+<span style="color: #888888">      Stay at rest until pressure drops below peep again</span>
+<span style="color: #888888">      If pressure goes above a certain (hard coded?) amount, sound alarm</span>
+<span style="color: #888888">      TODO: adjust speed based on patients breath cycle,</span>
+<span style="color: #888888">       if patient INH during EXH, speed up rate,</span>
+<span style="color: #888888">       ?? if patient holds at home too long, slow down rate</span>
+<span style="color: #888888">           ?? when is correct to slow down speed</span>
+<span style="color: #888888">  */</span>
+  <span style="color: #888888">/*</span>
+<span style="color: #888888">     tested, does not work</span>
+<span style="color: #888888">      // if patient INH during EXH</span>
+<span style="color: #888888">      if(pressureConverted &lt; peep &amp;&amp; (peep - pressureConverted) &gt;= 1.5 &amp;&amp; breathEnabled &amp;&amp; dir == EXH){</span>
+<span style="color: #888888">        SET_LOW(PORTB,dir_pin); // digitalWrite(dir_pin, LOW);</span>
+<span style="color: #888888">        dir = INH;</span>
+<span style="color: #888888">        setSteps = halfStepsElapsed;</span>
+<span style="color: #888888">        println(String(setSteps));</span>
+<span style="color: #888888">        halfStepsElapsed = 0;</span>
+<span style="color: #888888">      }</span>
+<span style="color: #888888">      // if pressure builds up to limit, begin exh</span>
+<span style="color: #888888">      if(pressure &gt; PRESSURE_WARNING &amp;&amp; breathEnabled &amp;&amp; dir == INH){</span>
+<span style="color: #888888">        SET_HIGH(PORTB,dir_pin); // digitalWrite(dir_pin, HIGH);</span>
+<span style="color: #888888">        dir = EXH;</span>
+<span style="color: #888888">        setSteps = halfStepsElapsed;</span>
+<span style="color: #888888">        halfStepsElapsed = 0;</span>
+<span style="color: #888888">      }</span>
+<span style="color: #888888">  */</span>
+}
+
+<span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">lcdPrint</span>(String inStr, <span style="color: #333399; font-weight: bold">int</span> col <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #333399; font-weight: bold">int</span> row <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #333399; font-weight: bold">int</span> size <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>) {
+  <span style="color: #008800; font-weight: bold">const</span> <span style="color: #333399; font-weight: bold">char</span> <span style="color: #333333">*</span>in <span style="color: #333333">=</span> inStr.c_str();
+  lcd.setCursor(col, row);
+  <span style="color: #333399; font-weight: bold">int</span> i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+  <span style="color: #008800; font-weight: bold">for</span> (; in[i] <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">0</span>; i<span style="color: #333333">++</span>) {
+    <span style="color: #008800; font-weight: bold">if</span> (in[i] <span style="color: #333333">==</span> <span style="color: #0044DD">&#39;\n&#39;</span>) {
+      col <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+      lcd.setCursor(col, <span style="color: #333333">++</span>row);
+    } <span style="color: #008800; font-weight: bold">else</span> {
+      lcd.write(in[i]);
+      lcd.setCursor(<span style="color: #333333">++</span>col, row);
+    }
+  }
+  <span style="color: #008800; font-weight: bold">for</span> (; i <span style="color: #333333">&lt;</span> size; i<span style="color: #333333">++</span>) {
+    lcd.write(<span style="color: #0044DD">&#39; &#39;</span>);
+    lcd.setCursor(<span style="color: #333333">++</span>col, row);
+  }
+}
+<span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">lcdPrintSimp</span>(String str, <span style="color: #333399; font-weight: bold">int</span> col, <span style="color: #333399; font-weight: bold">int</span> row) {
+  lcd.setCursor(col, row);
+  lcd.print(str);
+}
+<span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">lcdWrite</span>(<span style="color: #333399; font-weight: bold">char</span> chr, <span style="color: #333399; font-weight: bold">int</span> col, <span style="color: #333399; font-weight: bold">int</span> row) {
+  lcd.setCursor(col, row);
+  lcd.write(chr);
+}
+
+<span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">stepperHome</span>(String message) {
+  lcd.clear();
+  lcdPrint(message, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+  <span style="color: #333399; font-weight: bold">int</span> homeSteps <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">130</span>;
+  <span style="color: #333399; font-weight: bold">int</span> homeBPM <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">30</span>;
+  <span style="color: #333399; font-weight: bold">long</span> stepsPerMin <span style="color: #333333">=</span> <span style="color: #6600EE; font-weight: bold">2.0</span> <span style="color: #333333">*</span> <span style="color: #333399; font-weight: bold">long</span>(homeSteps) <span style="color: #333333">*</span> <span style="color: #333399; font-weight: bold">long</span>(homeBPM);
+  <span style="color: #333399; font-weight: bold">double</span> stepsPerSec <span style="color: #333333">=</span> stepsPerMin <span style="color: #333333">/</span> <span style="color: #6600EE; font-weight: bold">60.0</span>;
+  <span style="color: #333399; font-weight: bold">double</span> newSpeed <span style="color: #333333">=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">/</span> stepsPerSec);
+  compare_time <span style="color: #333333">=</span> newSpeed <span style="color: #333333">*</span> <span style="color: #6600EE; font-weight: bold">16e6</span> <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">256</span> <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">2</span>;
+  <span style="color: #008800; font-weight: bold">while</span> (digitalRead(homeSwitch)) {
+    SET_HIGH(PORTB, dir_pin);
+    dir <span style="color: #333333">=</span> EXH;
+    timerOn();
+  }
+  timerOff();
+  lcd.clear();
+}
+
+byte unchecked[<span style="color: #0000DD; font-weight: bold">8</span>] <span style="color: #333333">=</span> {B00000, B00000, B11111, B10001, B10001, B11111, B00000, B00000,};
+byte checked[<span style="color: #0000DD; font-weight: bold">8</span>] <span style="color: #333333">=</span> {B00000, B00000, B11111, B11111, B11111, B11111, B00000, B00000,};
+byte upArrow[<span style="color: #0000DD; font-weight: bold">8</span>] <span style="color: #333333">=</span> {B00000, B00000, B00000, B00100, B01010, B10001, B00000, B00000,};
+byte bothArrow[<span style="color: #0000DD; font-weight: bold">8</span>] <span style="color: #333333">=</span> {B00100, B01010, B10001, B00000, B00000, B10001, B01010, B00100,};
+byte downArrow[<span style="color: #0000DD; font-weight: bold">8</span>] <span style="color: #333333">=</span> {B00000, B00000, B00000, B10001, B01010, B00100, B00000, B00000,};
+byte back[<span style="color: #0000DD; font-weight: bold">8</span>] <span style="color: #333333">=</span> {B00000, B11111, B11101, B11011, B10111, B11011, B11101, B11111,};
+
+<span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">setup</span>() {
+
+  cli(); <span style="color: #888888">//temp disable interrupts</span>
+  TCCR1A <span style="color: #333333">=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> COM1A0); <span style="color: #888888">//turns off all bits except COM1A0 is turned on. Enables auto toggle of OC1A aka pin 9</span>
+  TCCR1B <span style="color: #333333">&amp;=</span> <span style="color: #333333">~</span>(<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> WGM13); <span style="color: #888888">//set up CTC</span>
+  TCCR1B <span style="color: #333333">|=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> WGM12); <span style="color: #888888">//set up CTC cont.</span>
+
+  <span style="color: #888888">//set prescalar to 256</span>
+  TCCR1B <span style="color: #333333">|=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> CS12);
+  TCCR1B <span style="color: #333333">&amp;=</span> <span style="color: #333333">~</span>(<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> CS11);
+  TCCR1B <span style="color: #333333">&amp;=</span> <span style="color: #333333">~</span>(<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> CS10);
+
+  TCNT1 <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>; <span style="color: #888888">//reset timer to 0</span>
+  OCR1A <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">23437</span>; <span style="color: #888888">//set timer compare value. This number will be overwritten in later code anyway</span>
+  TIMSK1 <span style="color: #333333">|=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> OCIE1A); <span style="color: #888888">//enables compare A interrupt</span>
+  sei(); <span style="color: #888888">//enable global interrupts</span>
+
+  Serial.begin(BAUD_RATE);
+  Serial.write(<span style="">&quot;INIT!</span><span style="color: #666666; font-weight: bold; ">\n</span><span style="">&quot;</span>);
+
+  PCICR <span style="color: #333333">|=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> PCIE1);    <span style="color: #888888">// This enables Pin Change Interrupt 1 that covers the Analog input pins or Port C.</span>
+  PCMSK1 <span style="color: #333333">|=</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> PCINT10) <span style="color: #333333">|</span> (<span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;&lt;</span> PCINT11);  <span style="color: #888888">// This enables the interrupt for pin 2 and 3 of Port C.</span>
+
+  lcd.init();
+  lcd.backlight();
+
+  lcd.createChar(<span style="color: #0000DD; font-weight: bold">0</span>, unchecked);
+  lcd.createChar(<span style="color: #0000DD; font-weight: bold">1</span>, checked);
+  lcd.createChar(<span style="color: #0000DD; font-weight: bold">2</span>, downArrow);
+  lcd.createChar(<span style="color: #0000DD; font-weight: bold">3</span>, upArrow);
+  lcd.createChar(<span style="color: #0000DD; font-weight: bold">4</span>, bothArrow);
+  lcd.createChar(<span style="color: #0000DD; font-weight: bold">5</span>, back);
+
+  SET_HIGH(DDRB, dir_pin); <span style="color: #888888">// pinMode(dir_pin,OUTPUT);</span>
+  SET_HIGH(DDRB, step_pin); <span style="color: #888888">// pinMode(step_pin,OUTPUT);</span>
+  pinMode(homeSwitch, INPUT_PULLUP);
+  SET_HIGH(PORTB, dir_pin); <span style="color: #888888">// digitalWrite(dir_pin,HIGH); // LOW is inhale</span>
+  pinMode(potButton, INPUT);
+  pinMode(buzzerPin, OUTPUT);
+
+  stepperHome(<span style="">&quot;P-Vent</span><span style="color: #666666; font-weight: bold; ">\n</span><span style="">v1.0&quot;</span>);
+
+  encoder.setPosition(<span style="color: #0000DD; font-weight: bold">0</span>);
+}
+
+ISR(PCINT1_vect) {
+  encoder.tick(); <span style="color: #888888">// just call tick() to check the state.</span>
+}
+
+<span style="color: #333399; font-weight: bold">long</span> lastTime <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+
+<span style="color: #333399; font-weight: bold">void</span> <span style="color: #0066BB; font-weight: bold">loop</span>() {
+  <span style="color: #888888">//Serial.println(&quot;Loop entered&quot;);</span>
+  encoder.tick();
+  <span style="color: #333399; font-weight: bold">int</span> buttonRead <span style="color: #333333">=</span> digitalRead(potButton);
+  <span style="color: #008800; font-weight: bold">if</span> (buttonRead <span style="color: #333333">!=</span> lastButtonState) {
+    lastDebounceTime <span style="color: #333333">=</span> millis();
+  }
+  <span style="color: #008800; font-weight: bold">if</span> ((millis() <span style="color: #333333">-</span> lastDebounceTime) <span style="color: #333333">&gt;</span> debounceDelay) {
+    <span style="color: #008800; font-weight: bold">if</span> (buttonRead <span style="color: #333333">!=</span> buttonState) {
+      buttonState <span style="color: #333333">=</span> buttonRead;
+      <span style="color: #008800; font-weight: bold">if</span> (buttonState <span style="color: #333333">==</span> LOW) {
+        buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+        <span style="color: #888888">//Serial.println(&quot;click&quot;);</span>
+      }
+    }
+  }
+  <span style="color: #888888">//Serial.println(encoder.getPosition());</span>
+
+  rawPressure <span style="color: #333333">=</span> analogRead(pressurePin);
+  pressure <span style="color: #333333">=</span> (rawPressure <span style="color: #333333">-</span> pressureOffset) <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">10</span> <span style="color: #333333">/</span> (pressureFull <span style="color: #333333">-</span> pressureOffset); <span style="color: #888888">// converted to kPa</span>
+  pressureConverted <span style="color: #333333">=</span> pressure <span style="color: #333333">*</span> <span style="color: #6600EE; font-weight: bold">10.197</span>;
+
+  <span style="color: #008800; font-weight: bold">if</span> (pressure <span style="color: #333333">&gt;=</span> pressureWarning) {
+    digitalWrite(buzzerPin, HIGH);
+    digitalWrite(buzzerPin, LOW);
+  }
+  <span style="color: #008800; font-weight: bold">else</span> {
+    digitalWrite(buzzerPin, LOW);
+  }
+
+  <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;mode&quot;</span>)
+      <span style="color: #333333">||</span> currentMenu.equals(<span style="">&quot;mandatory&quot;</span>)
+      <span style="color: #333333">||</span> currentMenu.equals(<span style="">&quot;responsive&quot;</span>)
+      <span style="color: #333333">||</span> currentMenu.equals(<span style="">&quot;settings&quot;</span>)) {
+    selectedRow <span style="color: #333333">=</span> encoder.getPosition();
+    <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">&gt;</span> rowsInMenu) {
+      selectedRow <span style="color: #333333">=</span> rowsInMenu;
+      encoder.setPosition(rowsInMenu);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+      selectedRow <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+      encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+  }
+
+  <span style="color: #008800; font-weight: bold">if</span> (prevSelectedRow <span style="color: #333333">!=</span> selectedRow <span style="color: #333333">||</span> prevSubmenu <span style="color: #333333">!=</span> submenu) {
+    cleared <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+  }
+
+  <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;mode&quot;</span>)) {
+    rowsInMenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">3</span>;
+    <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;Mandatory&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;Responsive&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">2</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #333333">||</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;Responsive&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;Settings&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">3</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;mandatory&quot;</span>;
+      lcd.clear();
+      encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;responsive&quot;</span>;
+      lcd.clear();
+      encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;settings&quot;</span>;
+      lcd.clear();
+      encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+  }
+
+  <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;mandatory&quot;</span>)) {
+    rowsInMenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">5</span>;
+    <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;Volume: &quot;</span> <span style="color: #333333">+</span> String(stepsPerHalfBreath), <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;Rate: &quot;</span> <span style="color: #333333">+</span> String(breathsPerMinute), <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">2</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;Rate: &quot;</span> <span style="color: #333333">+</span> String(breathsPerMinute), <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;I/E: 1:&quot;</span> <span style="color: #333333">+</span> String(ItoE).substring(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">4</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;I/E: 1:&quot;</span> <span style="color: #333333">+</span> String(ItoE).substring(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;START&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">4</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span> <span style="color: #333333">||</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">5</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;START&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">5</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;BACK&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">3</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      encoder.setPosition(stepsPerHalfBreath <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">5</span>);
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;volumeMan&quot;</span>;
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      encoder.setPosition(breathsPerMinute <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">2</span>);
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;rateMan&quot;</span>;
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      encoder.setPosition(ItoE);
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;ItoEMan&quot;</span>;
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      encoder.setPosition(<span style="color: #0000DD; font-weight: bold">0</span>);
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;runningMan&quot;</span>;
+      lcd.clear();
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">5</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;mode&quot;</span>;
+      lcd.clear();
+    }
+  }
+
+  <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;volumeMan&quot;</span>)
+           <span style="color: #333333">||</span> currentMenu.equals(<span style="">&quot;rateMan&quot;</span>)
+           <span style="color: #333333">||</span> currentMenu.equals(<span style="">&quot;ItoEMan&quot;</span>)) {
+    lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+    lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;volumeMan&quot;</span>)) {
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">8</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      stepsPerHalfBreath <span style="color: #333333">=</span> encoder.getPosition() <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">5</span>;
+      <span style="color: #008800; font-weight: bold">if</span> (stepsPerHalfBreath <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">20</span>) {
+        stepsPerHalfBreath <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">20</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">4</span>);
+      }
+      <span style="color: #008800; font-weight: bold">if</span> (stepsPerHalfBreath <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">275</span>) {
+        stepsPerHalfBreath <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">275</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">55</span>);
+      }
+      lcdPrint(String(stepsPerHalfBreath), <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">4</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;rateMan&quot;</span>)) {
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">6</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      breathsPerMinute <span style="color: #333333">=</span> encoder.getPosition() <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>;
+      <span style="color: #008800; font-weight: bold">if</span> (breathsPerMinute <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">6</span>) {
+        breathsPerMinute <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">6</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">3</span>);
+      }
+      <span style="color: #008800; font-weight: bold">if</span> (breathsPerMinute <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">60</span>) {
+        breathsPerMinute <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">60</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">30</span>);
+      }
+      lcdPrint(String(breathsPerMinute), <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">2</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;ItoEMan&quot;</span>)) {
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      ItoE <span style="color: #333333">=</span> encoder.getPosition();
+      <span style="color: #008800; font-weight: bold">if</span> (ItoE <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+        ItoE <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+      }
+      <span style="color: #008800; font-weight: bold">if</span> (ItoE <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">4</span>) {
+        ItoE <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">4</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">4</span>);
+      }
+      lcdPrint(String(ItoE).substring(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">8</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+    }
+    <span style="color: #008800; font-weight: bold">if</span> (buttonClicked) {
+      <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;volumeMan&quot;</span>)) {
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;rateMan&quot;</span>)) {
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">2</span>);
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;ItoEMan&quot;</span>)) {
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">3</span>);
+      }
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;mandatory&quot;</span>;
+      lcd.clear();
+    }
+  }
+
+  <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;runningMan&quot;</span>)) {
+    lcdPrint(<span style="">&quot;Volume:&quot;</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+    lcdPrint(String(stepsPerHalfBreath), <span style="color: #0000DD; font-weight: bold">8</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">4</span>);
+    lcdPrintSimp(<span style="">&quot;MAN&quot;</span>, <span style="color: #0000DD; font-weight: bold">13</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+    lcdPrintSimp(<span style="">&quot;Rate:&quot;</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    lcdPrint(String(breathsPerMinute), <span style="color: #0000DD; font-weight: bold">6</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">2</span>);
+    lcdPrintSimp(<span style="">&quot;1:&quot;</span> <span style="color: #333333">+</span> String(ItoE).substring(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">10</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>buttonUseState) {
+      submenu <span style="color: #333333">=</span> encoder.getPosition();
+      <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+        submenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">0</span>);
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>) {
+        submenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">3</span>;
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">2</span>) {
+        submenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">2</span>;
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">3</span>) {
+        submenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">&lt;</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">3</span>) {
+        submenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">0</span>);
+      }
+    }
+    <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>) {
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">5</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      <span style="color: #008800; font-weight: bold">if</span> (buttonClicked) {
+        buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">4</span>);
+        stepperHome(<span style="">&quot;Homing...&quot;</span>);
+        currentMenu <span style="color: #333333">=</span> <span style="">&quot;mandatory&quot;</span>;
+        lcd.clear();
+      }
+
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+      <span style="color: #888888">//volume</span>
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite((buttonUseState) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">||</span> buttonUseState) {
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>buttonUseState) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(stepsPerHalfBreath <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">5</span>);
+        }
+        buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+        lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+        stepsPerHalfBreath <span style="color: #333333">=</span> encoder.getPosition() <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">5</span>;
+        <span style="color: #008800; font-weight: bold">if</span> (stepsPerHalfBreath <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">20</span>) {
+          stepsPerHalfBreath <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">20</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">4</span>);
+        }
+        <span style="color: #008800; font-weight: bold">if</span> (stepsPerHalfBreath <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">130</span>) {
+          stepsPerHalfBreath <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">130</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">26</span>);
+        }
+        lcdPrint(String(stepsPerHalfBreath), <span style="color: #0000DD; font-weight: bold">8</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">4</span>);
+        <span style="color: #008800; font-weight: bold">if</span> (buttonClicked) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+        }
+      }
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) {
+      <span style="color: #888888">//rate</span>
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((buttonUseState) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">||</span> buttonUseState) {
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>buttonUseState) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(breathsPerMinute <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">2</span>);
+        }
+        buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+        lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+        breathsPerMinute <span style="color: #333333">=</span> encoder.getPosition() <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>;
+        <span style="color: #008800; font-weight: bold">if</span> (breathsPerMinute <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">6</span>) {
+          breathsPerMinute <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">6</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">3</span>);
+        }
+        <span style="color: #008800; font-weight: bold">if</span> (breathsPerMinute <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">60</span>) {
+          breathsPerMinute <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">60</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">30</span>);
+        }
+        lcdPrint(String(breathsPerMinute), <span style="color: #0000DD; font-weight: bold">6</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">2</span>);
+        <span style="color: #008800; font-weight: bold">if</span> (buttonClicked) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">2</span>);
+        }
+      }
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+      <span style="color: #888888">//i:e</span>
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite((buttonUseState) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">||</span> buttonUseState) {
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>buttonUseState) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(ItoE);
+        }
+        buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+        lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+        ItoE <span style="color: #333333">=</span> encoder.getPosition();
+        <span style="color: #008800; font-weight: bold">if</span> (ItoE <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+          ItoE <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+        }
+        <span style="color: #008800; font-weight: bold">if</span> (ItoE <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">4</span>) {
+          ItoE <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">4</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">4</span>);
+        }
+        lcdPrintSimp(<span style="">&quot;1:&quot;</span> <span style="color: #333333">+</span> String(ItoE).substring(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">10</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+        <span style="color: #008800; font-weight: bold">if</span> (buttonClicked) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">3</span>);
+        }
+      }
+    }
+
+    <span style="color: #888888">///////////////////RUN MAND////////////////////////////////////////</span>
+    <span style="color: #888888">//Serial.println(String(stepsPerHalfBreath) + &quot; &quot; + String(breathsPerMinute)  + &quot; &quot; + String(ItoE));</span>
+    mandatoryMode();
+  }
+
+
+  <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;responsive&quot;</span>)) {
+    rowsInMenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">5</span>;
+    <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;Volume: &quot;</span> <span style="color: #333333">+</span> String(stepsPerHalfBreath), <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;PEEP: &quot;</span> <span style="color: #333333">+</span> String(peep), <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">2</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;PEEP: &quot;</span> <span style="color: #333333">+</span> String(peep), <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;I/E: 1:&quot;</span> <span style="color: #333333">+</span> String(ItoE).substring(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">4</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;I/E: 1:&quot;</span> <span style="color: #333333">+</span> String(ItoE).substring(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;START&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">4</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span> <span style="color: #333333">||</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">5</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;START&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">5</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;BACK&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">3</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      encoder.setPosition(stepsPerHalfBreath <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">5</span>);
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;volumeRes&quot;</span>;
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      encoder.setPosition(peep);
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;peepRes&quot;</span>;
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      encoder.setPosition(ItoE);
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;ItoEMan&quot;</span>;
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      encoder.setPosition(<span style="color: #0000DD; font-weight: bold">0</span>);
+      breathsPerMinute <span style="color: #333333">=</span> resStartBPM;
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;runningRes&quot;</span>;
+      lcd.clear();
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">5</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      encoder.setPosition(<span style="color: #0000DD; font-weight: bold">2</span>);
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;mode&quot;</span>;
+      lcd.clear();
+    }
+  }
+
+  <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;volumeRes&quot;</span>)
+           <span style="color: #333333">||</span> currentMenu.equals(<span style="">&quot;peepRes&quot;</span>)
+           <span style="color: #333333">||</span> currentMenu.equals(<span style="">&quot;ItoERes&quot;</span>)) {
+    lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+    lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;volumeRes&quot;</span>)) {
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">8</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      stepsPerHalfBreath <span style="color: #333333">=</span> encoder.getPosition() <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">5</span>;
+      <span style="color: #008800; font-weight: bold">if</span> (stepsPerHalfBreath <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">20</span>) {
+        stepsPerHalfBreath <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">20</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">4</span>);
+      }
+      <span style="color: #008800; font-weight: bold">if</span> (stepsPerHalfBreath <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">130</span>) {
+        stepsPerHalfBreath <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">130</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">26</span>);
+      }
+      lcdPrint(String(stepsPerHalfBreath), <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">4</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;peepRes&quot;</span>)) {
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">6</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      peep <span style="color: #333333">=</span> encoder.getPosition();
+      <span style="color: #008800; font-weight: bold">if</span> (peep <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">0</span>) {
+        peep <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">0</span>);
+      }
+      <span style="color: #008800; font-weight: bold">if</span> (peep <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">15</span>) {
+        peep <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">15</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">15</span>);
+      }
+      lcdPrint(String(peep), <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">2</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;ItoERes&quot;</span>)) {
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      ItoE <span style="color: #333333">=</span> encoder.getPosition();
+      <span style="color: #008800; font-weight: bold">if</span> (ItoE <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+        ItoE <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+      }
+      <span style="color: #008800; font-weight: bold">if</span> (ItoE <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">4</span>) {
+        ItoE <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">4</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">4</span>);
+      }
+      lcdPrint(String(ItoE).substring(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">8</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+    }
+    <span style="color: #008800; font-weight: bold">if</span> (buttonClicked) {
+      <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;volumeRes&quot;</span>)) {
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;peepRes&quot;</span>)) {
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">2</span>);
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;ItoERes&quot;</span>)) {
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">3</span>);
+      }
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;responsive&quot;</span>;
+      lcd.clear();
+    }
+  }
+
+  <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;runningRes&quot;</span>)) {
+    <span style="color: #888888">//Serial.println(&quot;res&quot;);</span>
+    lcdPrint(<span style="">&quot;Volume:&quot;</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+    lcdPrint(String(stepsPerHalfBreath), <span style="color: #0000DD; font-weight: bold">8</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">4</span>);
+    lcdPrintSimp(<span style="">&quot;RES&quot;</span>, <span style="color: #0000DD; font-weight: bold">13</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+    lcdPrintSimp(<span style="">&quot;PEEP:&quot;</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    lcdPrint(String(peep), <span style="color: #0000DD; font-weight: bold">6</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">2</span>);
+    lcdPrintSimp(<span style="">&quot;1:&quot;</span> <span style="color: #333333">+</span> String(ItoE).substring(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">10</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>buttonUseState) {
+      submenu <span style="color: #333333">=</span> encoder.getPosition();
+      <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+        submenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">0</span>);
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>) {
+        submenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">3</span>;
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">2</span>) {
+        submenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">2</span>;
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">3</span>) {
+        submenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">&lt;</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">3</span>) {
+        submenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">0</span>);
+      }
+    }
+    <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>) {
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">5</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      <span style="color: #008800; font-weight: bold">if</span> (buttonClicked) {
+        buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">4</span>);
+        stepperHome(<span style="">&quot;Homing...&quot;</span>);
+        currentMenu <span style="color: #333333">=</span> <span style="">&quot;responsive&quot;</span>;
+        lcd.clear();
+      }
+
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+      <span style="color: #888888">//volume</span>
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite((buttonUseState) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">||</span> buttonUseState) {
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>buttonUseState) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(stepsPerHalfBreath <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">5</span>);
+        }
+        buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+        lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+        stepsPerHalfBreath <span style="color: #333333">=</span> encoder.getPosition() <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">5</span>;
+        <span style="color: #008800; font-weight: bold">if</span> (stepsPerHalfBreath <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">20</span>) {
+          stepsPerHalfBreath <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">20</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">4</span>);
+        }
+        <span style="color: #008800; font-weight: bold">if</span> (stepsPerHalfBreath <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">130</span>) {
+          stepsPerHalfBreath <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">130</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">26</span>);
+        }
+        lcdPrint(String(stepsPerHalfBreath), <span style="color: #0000DD; font-weight: bold">8</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">4</span>);
+        <span style="color: #008800; font-weight: bold">if</span> (buttonClicked) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+        }
+      }
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) {
+      <span style="color: #888888">//rate</span>
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite((buttonUseState) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">||</span> buttonUseState) {
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>buttonUseState) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(peep);
+        }
+        buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+        lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+        peep <span style="color: #333333">=</span> encoder.getPosition();
+        <span style="color: #008800; font-weight: bold">if</span> (peep <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">0</span>) {
+          peep <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">0</span>);
+        }
+        <span style="color: #008800; font-weight: bold">if</span> (peep <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">15</span>) {
+          peep <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">15</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">15</span>);
+        }
+        lcdPrint(String(peep), <span style="color: #0000DD; font-weight: bold">6</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">2</span>);
+        <span style="color: #008800; font-weight: bold">if</span> (buttonClicked) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">2</span>);
+        }
+      }
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (submenu <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+      <span style="color: #888888">//i:e</span>
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite((buttonUseState) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">||</span> buttonUseState) {
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>buttonUseState) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(ItoE);
+        }
+        buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+        lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+        ItoE <span style="color: #333333">=</span> encoder.getPosition();
+        <span style="color: #008800; font-weight: bold">if</span> (ItoE <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+          ItoE <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+        }
+        <span style="color: #008800; font-weight: bold">if</span> (ItoE <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">4</span>) {
+          ItoE <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">4</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">4</span>);
+        }
+        lcdPrintSimp(<span style="">&quot;1:&quot;</span> <span style="color: #333333">+</span> String(ItoE).substring(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">10</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+        <span style="color: #008800; font-weight: bold">if</span> (buttonClicked) {
+          buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          buttonUseState <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+          encoder.setPosition(<span style="color: #0000DD; font-weight: bold">3</span>);
+        }
+      }
+    }
+
+    <span style="color: #888888">///////////////////RUN RESP//////////////////////////</span>
+    <span style="color: #888888">//Serial.println(String(stepsPerHalfBreath) + &quot; &quot; + String(peep)  + &quot; &quot; + String(ItoE));</span>
+    responsiveMode();
+  }
+
+  <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;settings&quot;</span>)) {
+    <span style="color: #888888">//Serial.println(encoder.getPosition());</span>
+    rowsInMenu <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">3</span>;
+    <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;Pres warn: &quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrint(String(pressureWarning, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">12</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">3</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;Resp BPM: &quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrint(String(resStartBPM), <span style="color: #0000DD; font-weight: bold">11</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">2</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">2</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #333333">||</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+      <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>cleared) {
+        lcd.clear();
+        cleared <span style="color: #333333">=</span> <span style="color: #007020">true</span>;
+      }
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrintSimp(<span style="">&quot;Resp BPM:&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      lcdPrint(String(resStartBPM), <span style="color: #0000DD; font-weight: bold">11</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">2</span>);
+      lcdWrite((selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) <span style="color: #333333">?</span> byte(<span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">:</span> byte(<span style="color: #0000DD; font-weight: bold">0</span>), <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdPrintSimp(<span style="">&quot;BACK&quot;</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">3</span>), <span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;presSet&quot;</span>;
+      encoder.setPosition(pressureWarning <span style="color: #333333">/</span> <span style="color: #6600EE; font-weight: bold">.1</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;BPMSet&quot;</span>;
+      encoder.setPosition(resStartBPM <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">2</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (buttonClicked <span style="color: #333333">&amp;&amp;</span> selectedRow <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;mode&quot;</span>;
+      lcd.clear();
+      encoder.setPosition( <span style="color: #0000DD; font-weight: bold">3</span>);
+    }
+  }
+  <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;presSet&quot;</span>)
+           <span style="color: #333333">||</span> currentMenu.equals(<span style="">&quot;BPMSet&quot;</span>)) {
+    lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+    lcdWrite(<span style="color: #0044DD">&#39; &#39;</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>);
+    <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;presSet&quot;</span>)) {
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">11</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      pressureWarning <span style="color: #333333">=</span> encoder.getPosition() <span style="color: #333333">*</span> <span style="color: #6600EE; font-weight: bold">.1</span>;
+      <span style="color: #008800; font-weight: bold">if</span> (pressureWarning <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">2</span>) {
+        pressureWarning <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">2</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">20</span>);
+      }
+      <span style="color: #008800; font-weight: bold">if</span> (pressureWarning <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">5</span>) {
+        pressureWarning <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">5</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">50</span>);
+      }
+      lcdPrint(String(pressureWarning, <span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">12</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">3</span>);
+    }
+    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;BPMSet&quot;</span>)) {
+      lcdWrite(byte(<span style="color: #0000DD; font-weight: bold">1</span>), <span style="color: #0000DD; font-weight: bold">10</span>, <span style="color: #0000DD; font-weight: bold">0</span>);
+      resStartBPM <span style="color: #333333">=</span> encoder.getPosition() <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>;
+      <span style="color: #008800; font-weight: bold">if</span> (resStartBPM <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">6</span>) {
+        resStartBPM <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">6</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">3</span>);
+      }
+      <span style="color: #008800; font-weight: bold">if</span> (resStartBPM <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">60</span>) {
+        resStartBPM <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">60</span>;
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">30</span>);
+      }
+      lcdPrint(String(resStartBPM), <span style="color: #0000DD; font-weight: bold">11</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">2</span>);
+    }
+    <span style="color: #008800; font-weight: bold">if</span> (buttonClicked) {
+      <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;presSet&quot;</span>)) {
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">1</span>);
+      }
+      <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (currentMenu.equals(<span style="">&quot;BPMSet&quot;</span>)) {
+        encoder.setPosition(<span style="color: #0000DD; font-weight: bold">2</span>);
+      }
+      buttonClicked <span style="color: #333333">=</span> <span style="color: #007020">false</span>;
+      currentMenu <span style="color: #333333">=</span> <span style="">&quot;settings&quot;</span>;
+      lcd.clear();
+    }
+  }
+
+
+  lastButtonState <span style="color: #333333">=</span> buttonRead;
+  prevSelectedRow <span style="color: #333333">=</span> selectedRow;
+  prevSubmenu <span style="color: #333333">=</span> submenu;
+
+  Serial.println(String(micros() <span style="color: #333333">-</span> lastTime) <span style="color: #333333">+</span> <span style="">&quot;</span><span style="color: #666666; font-weight: bold; ">\t</span><span style="">&quot;</span> <span style="color: #333333">+</span> String(speed));
+  lastTime <span style="color: #333333">=</span> micros();
+}
+
+ISR(TIMER1_COMPA_vect) {
+  OCR1A <span style="color: #333333">=</span> compare_time;
+  halfStepsElapsed<span style="color: #333333">++</span>;
+}
+</pre></td></tr></table></div>
+<br>
+</div>
+</body>
+</html>

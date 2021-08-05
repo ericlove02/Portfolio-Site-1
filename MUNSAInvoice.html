@@ -1,0 +1,643 @@
+<!doctype html>
+<html style="height:100%;">
+<head>
+<meta charset="utf-8">
+<title>MUNSA_Invoice.js | Eric Love</title>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link href="sitestyle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="navbar"> <a href="index.html" class="logo"><img src="images/PersonalLogo.png" width="629" height="630" alt=""/></a> <a href="index.html">Home</a> <a href="projects.html" >Projects</a> 
+<a href="resume.html">Resume</a>
+  <div class="dropdown">
+    <div class = "dropbtn">
+      <button class = "dropbtn">Contact </button>
+      <div class="dropdown-content"> <a href="mailto:ericlove2002@gmail.com" target="_blank">Email</a> <a href="https://www.linkedin.com/in/ericlove02" target="_blank">LinkedIn</a> <a href="contact.html">Message Me</a> </div>
+    </div>
+  </div>
+</div>
+<div style="padding-top:40px;height: 100%;
+    height: -webkit-calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: calc(100% - 40px);">
+<br>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:50%;margin:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">function</span> formEmailInvoice() {
+<span style="color: #888888">//written by Eric Love XXIV</span>
+<span style="color: #888888">//direct any questions to eric.love@yahoo.com</span>
+<span style="color: #008800; font-weight: bold">var</span> ui <span style="color: #333333">=</span> SpreadsheetApp.getUi();
+<span style="color: #008800; font-weight: bold">var</span> response1 <span style="color: #333333">=</span> ui.prompt(<span style="color: #333333">&amp;</span>quot;Invoice ID<span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot;Enter the invoice template ID (<span style="color: #008800; font-weight: bold">if</span> not <span style="color: #008800; font-weight: bold">default</span>)<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>quot;,
+ui.ButtonSet.OK).getResponseText(); <span style="color: #888888">//get from url of doc to be attached</span>
+<span style="color: #008800; font-weight: bold">var</span> responseYN <span style="color: #333333">=</span> ui.alert(<span style="color: #333333">&amp;</span>quot;Do you want to email sponsors now<span style="color: #333333">?&amp;</span>quot;, ui.ButtonSet.YES_NO);
+<span style="color: #008800; font-weight: bold">var</span> response2 <span style="color: #333333">=</span> ui.prompt(<span style="color: #333333">&amp;</span>quot;Emails<span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot;Enter email to send to (not including sponsors)<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>quot;,
+ui.ButtonSet.OK).getResponseText();
+<span style="color: #008800; font-weight: bold">var</span> response3 <span style="color: #333333">=</span> ui.prompt(<span style="color: #333333">&amp;</span>quot;Rows<span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot;Enter the number of the <span style="color: #008800; font-weight: bold">final</span> row on the spreadsheet<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>quot;,
+ui.ButtonSet.OK).getResponseText();
+<span style="color: #008800; font-weight: bold">var</span> invoiceTemplate <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #0000DD; font-weight: bold">1</span>IeDaVQp4XEA1bMfM_sCGHf3pk58x1QQo1kRS8brzyI8<span style="color: #333333">&amp;</span>quot;;
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(response1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+invoiceTemplate <span style="color: #333333">==</span> response1;
+}
+<span style="color: #008800; font-weight: bold">var</span> ss <span style="color: #333333">=</span> SpreadsheetApp.getActiveSpreadsheet();
+<span style="color: #008800; font-weight: bold">var</span> data <span style="color: #333333">=</span> ss.getSheets()[<span style="color: #0000DD; font-weight: bold">0</span>];
+<span style="color: #008800; font-weight: bold">var</span> sent <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;
+<span style="color: #008800; font-weight: bold">var</span> sentReceipt <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;
+<span style="color: #008800; font-weight: bold">var</span> remaining <span style="color: #333333">=</span> (response3<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>);
+ui.alert(<span style="color: #333333">&amp;</span>quot;Check Columns<span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot;Ensure that data columns are correct, check code <span style="color: #008800; font-weight: bold">for</span> list <span style="color: #008800; font-weight: bold">in</span>
+comments<span style="color: #333333">&amp;</span>quot;, ui.ButtonSet.OK_CANCEL);
+<span style="color: #008800; font-weight: bold">var</span> htmlOutput <span style="color: #333333">=</span> HtmlService.createHtmlOutput(<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>lt;p<span style="color: #333333">&amp;</span>gt;Emails sent<span style="color: #333333">:</span>
+<span style="color: #333333">&amp;</span>lt;<span style="color: #333333; ">/p&amp;gt;&amp;quot;).setWidth(600).setHeight(800);</span>
+SpreadsheetApp.getUi().showModalDialog(htmlOutput, <span style="color: #333333">&amp;</span>quot;Emails sent<span style="color: #333333">&amp;</span>quot;);
+
+<span style="color: #008800; font-weight: bold">for</span>(<span style="color: #008800; font-weight: bold">var</span> i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">2</span>; i <span style="color: #333333">&amp;</span>lt;<span style="color: #333333">=</span> response3; <span style="color: #333333">++</span>i){
+<span style="color: #008800; font-weight: bold">var</span> school_name <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;B<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// B - School</span>
+Name
+<span style="color: #008800; font-weight: bold">var</span> school_add <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;D<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// D - School</span>
+Address
+<span style="color: #008800; font-weight: bold">var</span> school_city <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;E<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// E - School</span>
+City
+<span style="color: #008800; font-weight: bold">var</span> school_state <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;F<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// F - School</span>
+State
+
+<span style="color: #008800; font-weight: bold">var</span> school_zip <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;G<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// G - School</span>
+Zip Code
+<span style="color: #008800; font-weight: bold">var</span> school_country <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;H<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// H - School</span>
+Country
+<span style="color: #008800; font-weight: bold">var</span> sponsor_name <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;I<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// I -</span>
+Sponsor Name
+<span style="color: #008800; font-weight: bold">var</span> sponsor_email <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;J<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// J -</span>
+Sponsor Email
+<span style="color: #008800; font-weight: bold">var</span> sponsor_phone <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;K<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// K -</span>
+Sponsor Phone <span style="color: #007020">Number</span>
+<span style="color: #008800; font-weight: bold">var</span> add_sponsors <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;L<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// L -</span>
+Additional Sponsor Names
+<span style="color: #008800; font-weight: bold">var</span> total_sponsors <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;M<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// M - Total</span>
+<span style="color: #007020">Number</span> of Sponsors
+<span style="color: #008800; font-weight: bold">var</span> total_delegates <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// N - Total</span>
+<span style="color: #007020">Number</span> of Delegates
+<span style="color: #008800; font-weight: bold">var</span> OAS_students <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;O<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// O -</span>
+<span style="color: #007020">Number</span> of OAS Students
+<span style="color: #008800; font-weight: bold">var</span> hotel_rooms <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;P<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// P - Number</span>
+of Hotel Rooms
+<span style="color: #008800; font-weight: bold">var</span> delegate_dance <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;S<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// S -</span>
+<span style="color: #007020">Number</span> of Delegates to Delegate Dance
+<span style="color: #008800; font-weight: bold">var</span> XS <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;T<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// T - Number of</span>
+XS Shirts
+<span style="color: #008800; font-weight: bold">var</span> S <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;U<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// U - Number of S</span>
+Shirts
+<span style="color: #008800; font-weight: bold">var</span> M <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;V<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// V - Number of M</span>
+Shirts
+<span style="color: #008800; font-weight: bold">var</span> L <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;W<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// W - Number of L</span>
+Shirts
+<span style="color: #008800; font-weight: bold">var</span> XL <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;X<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// X - Number of</span>
+XL Shirts
+<span style="color: #008800; font-weight: bold">var</span> XXL <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;Y<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue(); <span style="color: #888888">// Y - Number of</span>
+XXL Shirts
+<span style="color: #008800; font-weight: bold">var</span> country1 <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;Z<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// Z - First</span>
+Choice Country
+<span style="color: #008800; font-weight: bold">var</span> country2 <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;AA<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// AA -</span>
+Second Choice Country
+<span style="color: #008800; font-weight: bold">var</span> country3 <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;AB<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// AB - Third</span>
+Choice Country
+<span style="color: #008800; font-weight: bold">var</span> country4 <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;AC<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// AC - Fourth</span>
+Chocie Country
+<span style="color: #008800; font-weight: bold">var</span> country5 <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;AD<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().trim(); <span style="color: #888888">// AD - Fifth</span>
+Choice Country
+
+<span style="color: #008800; font-weight: bold">var</span> special_committee1 <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;AE<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().toString().trim(); <span style="color: #888888">// AE -</span>
+First Choice Special Committee
+<span style="color: #008800; font-weight: bold">var</span> special_committee2 <span style="color: #333333">=</span> data.getRange(<span style="color: #333333">&amp;</span>quot;AF<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>i.toString()).getValue().toString().trim(); <span style="color: #888888">// AF -</span>
+Second Choice Special Committee
+<span style="color: #888888">//**If any of this is different on the</span>
+spreadsheet change the letter next to the objects<span style="color: #333333">**</span><span style="color: #888888">//</span>
+<span style="color: #008800; font-weight: bold">if</span>(OAS_students <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){OAS_students <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;}
+<span style="color: #008800; font-weight: bold">if</span>(hotel_rooms <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){hotel_rooms <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;}
+<span style="color: #008800; font-weight: bold">if</span>(delegate_dance <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){delegate_dance <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;}
+<span style="color: #008800; font-weight: bold">if</span>(XS <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">||</span> XS <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){XS <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(S <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">||</span> S <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){S <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(M <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">||</span> M <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){M <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(L <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">||</span> L <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){L <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(XL <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">||</span> XL <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){XL <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(XXL <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">||</span> XXL <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){XXL <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(country1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;NA<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span> country1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){country1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(country2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;NA<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span>country2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){country2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(country3 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;NA<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span>country3 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){country3 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(country4 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;NA<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span>country4 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){country4 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(country5 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;NA<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span>country5 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot;){country5 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(special_committee1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;NA<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span> special_committee1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span> special_committee1 <span style="color: #333333">==</span>
+<span style="color: #333333">&amp;</span>quot;<span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">&amp;</span>quot;){special_committee1 <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">if</span>(special_committee2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;NA<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span> special_committee2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;N<span style="color: #333333">/</span>A<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span> special_committee2 <span style="color: #333333">==</span>
+<span style="color: #333333">&amp;</span>quot;<span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">&amp;</span>quot;){special_committee2 <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;;}
+<span style="color: #008800; font-weight: bold">var</span> USGEA <span style="color: #333333">=</span> response2; <span style="color: #888888">// usg external affairs email</span>
+<span style="color: #888888">// calculate vars for invoice</span>
+<span style="color: #008800; font-weight: bold">var</span> delegate_cost <span style="color: #333333">=</span> total_delegates <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">65</span>; <span style="color: #888888">// cost per delegate</span>
+<span style="color: #008800; font-weight: bold">var</span> sponsor_cost <span style="color: #333333">=</span> total_sponsors <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">50</span>; <span style="color: #888888">// cost per sponsor</span>
+<span style="color: #008800; font-weight: bold">var</span> dance_cost <span style="color: #333333">=</span> delegate_dance <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">5</span>; <span style="color: #888888">// cost per dance</span>
+<span style="color: #008800; font-weight: bold">var</span> shirt_total <span style="color: #333333">=</span> <span style="color: #007020">Number</span>(XS) <span style="color: #333333">+</span> <span style="color: #007020">Number</span>(S) <span style="color: #333333">+</span> <span style="color: #007020">Number</span>(M) <span style="color: #333333">+</span> <span style="color: #007020">Number</span>(L) <span style="color: #333333">+</span> <span style="color: #007020">Number</span>(XL) <span style="color: #333333">+</span>
+<span style="color: #007020">Number</span>(XXL);
+<span style="color: #008800; font-weight: bold">var</span> shirts_cost <span style="color: #333333">=</span> shirt_total <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">15</span>; <span style="color: #888888">// cost per shirt</span>
+<span style="color: #008800; font-weight: bold">var</span> grand_total <span style="color: #333333">=</span> sponsor_cost <span style="color: #333333">+</span> delegate_cost <span style="color: #333333">+</span> dance_cost <span style="color: #333333">+</span> shirts_cost <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">100</span>;
+<span style="color: #008800; font-weight: bold">var</span> curDate <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Date</span>();
+<span style="color: #008800; font-weight: bold">var</span> dd <span style="color: #333333">=</span> curDate.getDate();
+<span style="color: #008800; font-weight: bold">var</span> mm <span style="color: #333333">=</span> curDate.getMonth() <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+<span style="color: #008800; font-weight: bold">var</span> yy <span style="color: #333333">=</span> curDate.getYear();
+
+<span style="color: #008800; font-weight: bold">var</span> invoiceName <span style="color: #333333">=</span> school_name <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot; Invoice <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> mm <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">-&amp;</span>quot; <span style="color: #333333">+</span> dd <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">-&amp;</span>quot; <span style="color: #333333">+</span> yy;
+
+<span style="color: #008800; font-weight: bold">var</span> SchoolInvoice <span style="color: #333333">=</span> DriveApp.getFileById(invoiceTemplate)
+.makeCopy(invoiceName)
+.getId();
+<span style="color: #008800; font-weight: bold">var</span> copyDoc <span style="color: #333333">=</span> DocumentApp.openById(SchoolInvoice);
+<span style="color: #008800; font-weight: bold">var</span> copyBody <span style="color: #333333">=</span> copyDoc.getActiveSection();
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSpersonname<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, sponsor_name);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSSchool<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, school_name);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSAddress<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, school_add);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSCity<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, school_city);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSState<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, school_state);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSZip<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, school_zip);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSdelegate<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, total_delegates);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSSponsor<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, total_sponsors);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSdance<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, delegate_dance);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSshirttotal<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, shirt_total);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSdelegatcost<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, delegate_cost);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSsorcost<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, sponsor_cost);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSdanccost<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, dance_cost);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSshirtcost<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, shirts_cost);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSgrandtotal<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, grand_total);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSShirtXS<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, XS);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSShirtS<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, S);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSShirtM<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, M);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSShirtL<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, L);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSShirtXL<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, XL);
+copyBody.replaceText(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;keyHSShirtXXL<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;, XXL);
+copyDoc.saveAndClose();
+
+<span style="color: #008800; font-weight: bold">var</span> subject1 <span style="color: #333333">=</span> <span style="color: #333333">&amp;</span>quot;MUNSA XXIV<span style="color: #333333">:</span>Envision registration <span style="color: #333333">--</span> <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> school_name;
+
+<span style="color: #888888">/////////////////////////////////////////////////////////////////////////////////</span>
+<span style="color: #008800; font-weight: bold">var</span> body <span style="color: #333333">=</span> sponsor_name <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>lt;img
+src<span style="color: #333333">=</span><span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot;https<span style="color: #333333">:</span><span style="color: #888888">//drive.google.com/uc?export=view&amp;amp;id=0B7kyD_PT0o14azNac3RveTFMeDRHQlhx</span>
+RTd2QVVZai1yY3Q4<span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot; alt<span style="color: #333333">=</span><span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot;Envision Logo<span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span>
+<span style="color: #333333">&amp;</span>quot; height<span style="color: #333333">=</span><span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot;<span style="color: #0000DD; font-weight: bold">250</span><span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot; width<span style="color: #333333">=</span><span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot;<span style="color: #0000DD; font-weight: bold">210</span><span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot; align<span style="color: #333333">=</span><span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot;right<span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> school_name <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span>
+school_add <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> school_city <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> school_state <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> school_zip <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>quot;;
+
+<span style="color: #008800; font-weight: bold">if</span>(school_country <span style="color: #333333">!=</span> <span style="color: #333333">&amp;</span>quot;USA<span style="color: #333333">&amp;</span>quot;){
+
+body <span style="color: #333333">+=</span> school_country;
+}
+
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;h2<span style="color: #333333">&amp;</span>gt;Thank you, <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> sponsor_name <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;, <span style="color: #008800; font-weight: bold">for</span> your interest <span style="color: #008800; font-weight: bold">in</span> MUNSA XXIV<span style="color: #333333">:</span>
+<span style="color: #333333">&amp;</span>lt;i<span style="color: #333333">&amp;</span>gt;Envision<span style="color: #333333">&amp;</span>lt;<span style="color: #333333; ">/i&amp;gt;.&amp;lt;/h2&amp;gt;&amp;quot; +</span>
+<span style="color: #333333">&amp;</span>quot;We<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;ve received your registration request <span style="color: #008800; font-weight: bold">for</span> <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> total_delegates <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot; delegate(s) and <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span>
+total_sponsors <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot; sponsor(s). <span style="color: #333333">&amp;</span>quot;;
+
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(OAS_students <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;You have indicated that <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> OAS_students <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot; delegate(s) speak fluent Spanish and
+will be particapting <span style="color: #008800; font-weight: bold">in</span> the OAS delegation. <span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;;
+}
+<span style="color: #008800; font-weight: bold">else</span>{
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;;
+}
+
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country3 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country4 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country5 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;
+<span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; special_committee1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; special_committee2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;Your requests are as follows<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>quot;;
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> country1;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> country2;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country3 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> country3;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country4 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> country4;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country5 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;, and <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> country5;
+}
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;. Your specialized committee country<span style="color: #333333">/</span>representative requests are as follows<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>quot;;
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(special_committee1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> special_committee1;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(special_committee2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot; and <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> special_committee2;
+
+}
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;. I will email you at a later time to confirm your assignments.<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;;
+}
+<span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country3 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country4 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country5
+<span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;) <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; (special_committee1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; special_committee2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;Your country requests are as follows<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>quot;;
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> country1;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> country2;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country3 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> country3;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country4 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> country4;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country5 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;, and <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> country5;
+}
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;. I will email you at a later time to confirm your country assignments.<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;;
+}
+<span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(country1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country3 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country4 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; country5
+<span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;) <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; (special_committee1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; special_committee2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;. Your specialized committee country<span style="color: #333333">/</span>representative requests are as follows<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>quot;;
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(special_committee1 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> special_committee1;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(special_committee2 <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot; and <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> special_committee2;
+}
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;. I will email you at a later time to confirm your assignments.<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;;
+}
+<span style="color: #008800; font-weight: bold">else</span>{
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;You have no country or specialized committee requests. If <span style="color: #008800; font-weight: bold">this</span> needs to be
+changed, please email me immediately. <span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;;
+}
+
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;You have <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> delegate_dance <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot; delegate(s) attending the delegate
+dance.<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;;
+
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(XS <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; S <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; M <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; L <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; XL <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">&amp;</span>amp;<span style="color: #333333">&amp;</span>amp; XXL <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;Your t<span style="color: #333333">-</span>shirt order includes <span style="color: #333333">&amp;</span>quot;;
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(XS <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span> XS <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>)){
+body <span style="color: #333333">+=</span> XS <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;XS <span style="color: #333333">&amp;</span>quot;;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(S <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span> S <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>)){
+body <span style="color: #333333">+=</span> S <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;S <span style="color: #333333">&amp;</span>quot;;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(M <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span> M <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>)){
+body <span style="color: #333333">+=</span> M <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;M <span style="color: #333333">&amp;</span>quot;;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(L <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span> L <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>)){
+body <span style="color: #333333">+=</span> L <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;L <span style="color: #333333">&amp;</span>quot;;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(XL <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span> XL <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>)){
+body <span style="color: #333333">+=</span> XL <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;XL <span style="color: #333333">&amp;</span>quot;;
+}
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(XXL <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">||</span> XXL <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>)){
+body <span style="color: #333333">+=</span> XXL <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;XXL <span style="color: #333333">&amp;</span>quot;;
+}
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;shirts. <span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;;
+}
+<span style="color: #008800; font-weight: bold">else</span>{
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;You did not order any MUNSA t<span style="color: #333333">-</span>shirts.<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;;
+}
+
+<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span>(hotel_rooms <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">||</span> hotel_rooms <span style="color: #333333">==</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>quot;)){
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;You have indicated that you will be needing <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> hotel_rooms <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot; room(s) from <span style="color: #333333">&amp;</span>lt;a
+href <span style="color: #333333">=</span><span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot;https<span style="color: #333333">:</span><span style="color: #888888">//www.omnihotels.com/hotels/san-antonio\&amp;quot;&amp;gt;the Omni Hotel&amp;lt;/a&amp;gt;. &amp;quot;</span>
+<span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;Please remember that the MUNSA Staff is not <span style="color: #008800; font-weight: bold">in</span> charge of booking your
+rooms.<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;;
+}
+<span style="color: #008800; font-weight: bold">else</span>{
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;You have indicated that you will not be needing rooms from <span style="color: #333333">&amp;</span>lt;a href
+<span style="color: #333333">=</span><span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot;https<span style="color: #333333">:</span><span style="color: #888888">//www.omnihotels.com/hotels/san-antonio\&amp;quot;&amp;gt;the Omni Hotel&amp;lt;/a&amp;gt;. &amp;quot;;</span>
+}
+
+body <span style="color: #333333">+=</span> <span style="color: #333333">&amp;</span>quot;If any of <span style="color: #008800; font-weight: bold">this</span> information needs to be changed, please email me
+immediately.<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;Best regards,<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;a href <span style="color: #333333">=</span> <span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot;mailto<span style="color: #333333">:</span>rtubbesing8964<span style="color: #333333; ">@</span>stu.neisd.net<span style="color: #333333; ">\</span><span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">+</span>
+<span style="color: #333333">&amp;</span>quot;Ryan Tubbesing<span style="color: #333333">&amp;</span>lt;<span style="color: #333333; ">/a&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;quot; + mm + &amp;quot;-&amp;quot; + dd + &amp;quot;-&amp;quot; + yy;</span>
+<span style="color: #888888">/////////////////////////////////////////////////////////////////////////////////</span>
+<span style="color: #008800; font-weight: bold">var</span> message <span style="color: #333333">=</span> {to<span style="color: #333333">:</span> USGEA, subject<span style="color: #333333">:</span> subject1, htmlBody<span style="color: #333333">:</span> body,
+attachments<span style="color: #333333">:</span>[DriveApp.getFileById(SchoolInvoice).getAs(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;application<span style="color: #333333">/</span>pdf<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;)]};
+<span style="color: #008800; font-weight: bold">if</span>(responseYN <span style="color: #333333">==</span> ui.Button.YES){
+<span style="color: #008800; font-weight: bold">var</span> message2 <span style="color: #333333">=</span> {to<span style="color: #333333">:</span> sponsor_email, subject<span style="color: #333333">:</span> subject1, htmlBody<span style="color: #333333">:</span> body,
+attachments<span style="color: #333333">:</span>[DriveApp.getFileById(SchoolInvoice).getAs(<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;application<span style="color: #333333">/</span>pdf<span style="color: #333333">&amp;</span><span style="color: #333333; ">#</span><span style="color: #0000DD; font-weight: bold">39</span>;)]};
+MailApp.sendEmail(message2);
+sent <span style="color: #333333">+=</span> sponsor_name <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">--</span> <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> sponsor_email <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> school_name <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333; ">\</span>n<span style="color: #333333">&amp;</span>quot;;
+sentReceipt <span style="color: #333333">+=</span> sponsor_name <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">--</span> <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> sponsor_email <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;, <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> school_name <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot;;
+}
+MailApp.sendEmail(message);
+<span style="color: #333333">--</span>remaining;
+htmlOutput <span style="color: #333333">=</span> HtmlService.createHtmlOutput(<span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>lt;p<span style="color: #333333">&amp;</span>gt;Emails have been sent to<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;<span style="color: #333333; ">/p&amp;gt;&amp;quot; +</span>
+sentReceipt <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;p<span style="color: #333333">&amp;</span>gt; Emails remaining<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>lt;<span style="color: #333333; ">/p&amp;gt;&amp;quot; +</span>
+remaining).setWidth(<span style="color: #0000DD; font-weight: bold">600</span>).setHeight(<span style="color: #0000DD; font-weight: bold">800</span>);
+SpreadsheetApp.getUi().showModalDialog(htmlOutput, <span style="color: #333333">&amp;</span>quot;Emails sent<span style="color: #333333">&amp;</span>quot;);
+}
+<span style="color: #008800; font-weight: bold">var</span> receipt <span style="color: #333333">=</span> {to<span style="color: #333333">:</span> USGEA, subject<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>quot;Email Invoices Sent Receipt<span style="color: #333333">&amp;</span>quot;, htmlBody<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>quot;Invoice Emails
+have been sent to<span style="color: #333333">:</span> <span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> sentReceipt <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt;<span style="color: #333333">&amp;</span>lt;br<span style="color: #333333">&amp;</span>gt; Check sent mailbox to see invoices or look
+at your copies.<span style="color: #333333">&amp;</span>quot;};
+MailApp.sendEmail(receipt);
+ui.alert(<span style="color: #333333">&amp;</span>quot;Emails have been sent to<span style="color: #333333">:</span> <span style="color: #333333; ">\</span>n<span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> sent <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333; ">\</span>n<span style="color: #333333; ">\</span>n All Emails have been sent<span style="color: #333333; ">\</span>nIn addition, all
+emails were sent to <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> USGEA <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot;<span style="color: #333333; ">\</span>nCheck <span style="color: #333333">&amp;</span>quot; <span style="color: #333333">+</span> USGEA <span style="color: #333333">+</span> <span style="color: #333333">&amp;</span>quot; <span style="color: #008800; font-weight: bold">for</span> receipt of sent emails<span style="color: #333333">&amp;</span>quot;);
+}
+</pre></td></tr></table></div>
+
+<br>
+</div>
+</body>
+</html>

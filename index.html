@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Eric Love Portfolio</title>
+<link href="sitestyle.css" rel="stylesheet" type="text/css"/>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div class="navbar"> <img src="images/PersonalLogo.png" width="629" height="630" alt=""/> <a class="active" href="home.html">Home</a> <a href="projects.html">Projects</a> <a href="resume.html">Resume</a>
+  <div class="dropdown">
+    <div class = "dropbtn">
+      <button class = "dropbtn">Contact </button>
+      <div class="dropdown-content"> <a href="mailto:ericlove2002@gmail.com" target="_blank">Email</a> <a href="https://www.linkedin.com/in/ericlove02" target="_blank">LinkedIn</a> <a href="contact.html">Message Me</a> </div>
+    </div>
+  </div>
+</div>
+<div class="header">
+  <div class="headerText">
+    <h1><b>Eric Love</b></h1>
+    <h2>Software Developer</h2>
+  </div>
+</div>
+<section id="about" class="about">
+  <div class="aboutHead">
+    <h2>About Me</h2>
+    <hr/>
+  </div>
+  <div class="container"> <img src="images/profile.png" alt="Eric Love" style="width:200px;height:200px"/> <!-- <img src="images/profile.jpg" alt="Eric Love"/> -->
+    <p>I am an avid programmer with aspirations to receive an education and work with computer science. I have worked with numerous tools and languages through many projects and being a part of various teams, including Kepler Enterprises and Model United Nations San Antonio. I am skilled in process automation, iOS development, web development, Java,  and various CAD software. I have one app published to the Apple App Store and one patent under my name. I attended the International School of the Americas high school and Texas A&amp;M University. </p>
+  </div>
+</section>
+<section id="skills" class="skills">
+  <h2>Technical Skills</h2>
+  <hr/>
+  <div class="container">
+    <div class="lang"> <img src="images/langIcon.png" alt="langIcon">
+      <p>Various languages including Swift, Python, and C++</p>
+    </div>
+    <div class="tools"> <img src="images/toolsIcon.png" alt="toolsIcon">
+      <p>Comfortable with many IDE's, CAD software, and other tools</p>
+    </div>
+    <div class="frameworks"> <img src="images/frameIcon.png" alt="framesIcon">
+      <p>Have worked extensivley with Cocoa Touch and Wiring frameworks</p>
+    </div>
+  </div>
+</section>
+<section id="gallery" class="gallery">
+  <h2>Projects</h2>
+  <hr/>
+  <div class="container">
+    <div class="mySlides">
+      <div class="numbertext">1 / 3</div>
+		<a href="projects.html"><img src="images/ventProj.jpg" style="width:100%" alt="ventilatorProj"></a> </div>
+    <div class="mySlides">
+      <div class="numbertext">2 / 3</div>
+      <a href="projects.html"><img src="images/munsaProj.jpg" style="width:100%" alt="MUNSAProj"></a> </div>
+    <div class="mySlides">
+      <div class="numbertext">3 / 3</div>
+		<a href="projects.html"><img src="images/mateProj.jpg" style="width:100%" alt="MATEProj"></a> </div>
+    <a class="prev" onclick="plusSlides(-1)">❮</a> <a class="next" onclick="plusSlides(1)">❯</a>
+    <div class="caption-container">
+      <p id="caption"></p>
+    </div>
+    <div class="row">
+      <div class="column"> <img class="demo cursor" src="images/ventProj.jpg" style="width:100%" onclick="currentSlide(1)" alt="Low-cost ventilator built for portable use in the military and third world countries"> </div>
+      <div class="column"> <img class="demo cursor" src="images/munsaProj.jpg" style="width:100%" onclick="currentSlide(2)" alt="iOS App developed for a MUNSA, the largest student-run Model UN conference in the Western Hemisphere"> </div>
+      <div class="column"> <img class="demo cursor" src="images/mateProj.jpg" style="width:100%" onclick="currentSlide(3)" alt="Underwater ROV designed to perform quick yet precise actions and complete missions in a competition field"> </div>
+    </div>
+  </div>
+</section>
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
+<section id="contactHome" class="contactHome">
+  <div class="container">
+    <h1>Eric Love</h1>
+    <p>Software Developer</p>
+    <hr/>
+    <div class="icons"> <a href="mailto:ericlove2002@gmail.com" target="_blank"><img src="images/emailIcon.png" alt="email"/></a> <a href="https://www.linkedin.com/in/ericlove02" target="_blank"><img src="images/linkedinIcon.png" alt="linkedin"/></a> <a href="https://www.instagram.com/ericc.love/" target="_blank"><img src="images/instagramIcon.png" alt="instagram"/></a> </div>
+  </div>
+</section>
+<footer class="footer">
+  <p>Copyright &copy; 2020 Eric Love</p>
+</footer>
+</body>
+</html>

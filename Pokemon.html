@@ -1,0 +1,1264 @@
+<!doctype html>
+<html style="height:100%;">
+<head>
+<meta charset="utf-8">
+<title>Pokemon.py | Eric Love</title>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link href="sitestyle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="navbar"> <a href="index.html" class="logo"><img src="images/PersonalLogo.png" width="629" height="630" alt=""/></a> <a href="index.html">Home</a> <a href="projects.html" >Projects</a> 
+<a href="resume.html">Resume</a>
+  <div class="dropdown">
+    <div class = "dropbtn">
+      <button class = "dropbtn">Contact </button>
+      <div class="dropdown-content"> <a href="mailto:ericlove2002@gmail.com" target="_blank">Email</a> <a href="https://www.linkedin.com/in/ericlove02" target="_blank">LinkedIn</a> <a href="contact.html">Message Me</a> </div>
+    </div>
+  </div>
+</div>
+<div style="padding-top:40px;height: 100%;
+    height: -webkit-calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: calc(100% - 40px);">
+<br>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:50%;margin:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #888888"># By submitting this assignment, I agree to the following:</span>
+<span style="color: #888888">#  &quot;Aggies do not lie, cheat, or steal, or tolerate those who do&quot;</span>
+<span style="color: #888888">#  &quot;I have not given or received any unauthorized aid on this assignment&quot;</span>
+<span style="color: #888888">#</span>
+<span style="color: #888888"># Name:        Eric Love, Caeden Landry, Andrew Krecek, Jonathan Kutsch</span>
+<span style="color: #888888"># Section:     514</span>
+<span style="color: #888888"># Assignment:  LAB 13 - Pokemon</span>
+<span style="color: #888888"># Date:        18 11 2020</span>
+
+<span style="color: #888888"># --- imports --- #</span>
+<span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">random</span> <span style="color: #008800; font-weight: bold">import</span> randint
+<span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">math</span> <span style="color: #008800; font-weight: bold">import</span> sqrt
+
+
+<span style="color: #888888"># --- functions --- #</span>
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">pokemon_catch</span>():
+    <span style="color: #DD4422">&quot;&quot;&quot;takes no input, runs mini game, returns boolean for whether or not catch was successful&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;A wild pokemon has appeared!&quot;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Guess the number 1 - 10 correct in under 3 guesses!&quot;</span>)
+    success <span style="color: #333333">=</span> <span style="color: #007020">False</span>
+    num <span style="color: #333333">=</span> randint(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">10</span>)
+    <span style="color: #008800; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">3</span>):
+        guess <span style="color: #333333">=</span> input_int(<span style="background-color: #fff0f0">&quot;Enter your guess:&quot;</span>)
+        <span style="color: #008800; font-weight: bold">if</span> <span style="color: #000000; font-weight: bold">not</span> guess <span style="color: #333333">==</span> num:
+            <span style="color: #008800; font-weight: bold">if</span> guess <span style="color: #333333">&gt;</span> num:
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;A little too high&quot;</span>)
+            <span style="color: #008800; font-weight: bold">elif</span> guess <span style="color: #333333">&lt;</span> num:
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;A little too low&quot;</span>)
+        <span style="color: #008800; font-weight: bold">else</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;You got it right!</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&quot;</span>)
+            success <span style="color: #333333">=</span> <span style="color: #007020">True</span>
+            <span style="color: #008800; font-weight: bold">break</span>
+        <span style="color: #008800; font-weight: bold">if</span> k <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #000000; font-weight: bold">and</span> <span style="color: #000000; font-weight: bold">not</span> success:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Dang! The number was &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(num) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;. Better luck next time&quot;</span>)
+    <span style="color: #008800; font-weight: bold">if</span> success:
+        add_pokemon()
+        <span style="color: #008800; font-weight: bold">global</span> playerInfo
+        playerInfo <span style="color: #333333">=</span> csv_to_list(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(currentPlayer) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;You caught a &quot;</span> <span style="color: #333333">+</span> playerInfo[<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">21</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;!&quot;</span>)
+        rand <span style="color: #333333">=</span> randint(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">3</span>)
+        addedCandy <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+        <span style="color: #008800; font-weight: bold">if</span> rand <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>:
+            addedCandy <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">3</span>
+        <span style="color: #008800; font-weight: bold">elif</span> rand <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>:
+            addedCandy <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">5</span>
+        <span style="color: #008800; font-weight: bold">elif</span> rand <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>:
+            addedCandy <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">10</span>
+        update_candies(currentPlayer, addedCandy)
+        <span style="color: #008800; font-weight: bold">print</span>(playerInfo[<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">21</span>], <span style="background-color: #fff0f0">&quot;and&quot;</span>, addedCandy, <span style="background-color: #fff0f0">&quot;candies have been added to your collection!</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&quot;</span>)
+    main_menu()
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">level_up</span>(lvl):
+    <span style="color: #DD4422">&quot;&quot;&quot;takes in current pokemon level, allows user to spend candies to level up, returns new level&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">global</span> currentPokemon, playerInfo, currentPlayer
+    <span style="color: #008800; font-weight: bold">if</span> <span style="color: #007020">int</span>(lvl) <span style="color: #333333">&gt;=</span> <span style="color: #0000DD; font-weight: bold">40</span>:
+        <span style="color: #008800; font-weight: bold">print</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>], <span style="background-color: #fff0f0">&quot;is already max level!&quot;</span>)
+    <span style="color: #008800; font-weight: bold">elif</span> <span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;=</span> <span style="color: #007020">int</span>(lvl) <span style="color: #333333">&lt;=</span> <span style="color: #0000DD; font-weight: bold">30</span>:
+        <span style="color: #008800; font-weight: bold">if</span> get_candies(currentPlayer) <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&gt;=</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+            update_candies(currentPlayer, <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>)
+            playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>] <span style="color: #333333">=</span> <span style="color: #007020">int</span>(<span style="color: #007020">float</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">+</span>
+                                                      <span style="color: #007020">float</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">*</span> <span style="color: #333333">.</span><span style="color: #4400EE; font-weight: bold">00</span><span style="color: #0000DD; font-weight: bold">94</span> <span style="color: #333333">/</span>
+                                                      (<span style="color: #333333">.</span><span style="color: #0000DD; font-weight: bold">095</span> <span style="color: #333333">*</span> sqrt(<span style="color: #007020">int</span>(lvl))))
+            <span style="color: #DD4422">&#39;&#39;&#39;if int(playerInfo[currentPokemon * 6 + 4]) &gt; int(playerInfo[currentPokemon * 6 + 3]):  # if cp &gt; max cp</span>
+<span style="color: #DD4422">                playerInfo[currentPokemon * 6 + 4] = int(playerInfo[currentPokemon * 6 + 3])</span>
+<span style="color: #DD4422">                print(&quot;Pokemon has reached its max CP&quot;)&#39;&#39;&#39;</span>
+            playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>] <span style="color: #333333">=</span> <span style="color: #007020">int</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>]) <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; has been leveled up to level &quot;</span> <span style="color: #333333">+</span>
+                  <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;. Their CP has increased to &quot;</span> <span style="color: #333333">+</span>
+                  <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]))
+            list_to_csv(playerInfo, <span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(currentPlayer) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>, <span style="background-color: #fff0f0">&#39;w&#39;</span>)
+        <span style="color: #008800; font-weight: bold">else</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;You don&#39;t have enough candies to level up&quot;</span>)
+    <span style="color: #008800; font-weight: bold">elif</span> <span style="color: #0000DD; font-weight: bold">31</span> <span style="color: #333333">&lt;=</span> <span style="color: #007020">int</span>(lvl) <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">40</span>:
+        <span style="color: #008800; font-weight: bold">if</span> get_candies(currentPlayer) <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #333333">&gt;=</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+            update_candies(currentPlayer, <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">2</span>)
+            playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>] <span style="color: #333333">=</span> <span style="color: #007020">int</span>(<span style="color: #007020">float</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">+</span>
+                                                      <span style="color: #007020">float</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">*</span>
+                                                      <span style="color: #333333">.</span><span style="color: #4400EE; font-weight: bold">0045</span> <span style="color: #333333">/</span> (<span style="color: #333333">.</span><span style="color: #0000DD; font-weight: bold">095</span> <span style="color: #333333">*</span> sqrt(<span style="color: #007020">int</span>(lvl))))
+            <span style="color: #DD4422">&#39;&#39;&#39;if int(playerInfo[currentPokemon * 6 + 4]) &gt; int(playerInfo[currentPlayer * 6 + 3]):  # if cp &gt; max cp</span>
+<span style="color: #DD4422">                playerInfo[currentPokemon * 6 + 4] = int(playerInfo[currentPlayer * 6 + 3])</span>
+<span style="color: #DD4422">                print(&quot;Pokemon has reached its max CP&quot;)&#39;&#39;&#39;</span>
+            playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>] <span style="color: #333333">=</span> <span style="color: #007020">int</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>]) <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>
+            <span style="color: #008800; font-weight: bold">print</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; has been leveled up to level &quot;</span> <span style="color: #333333">+</span>
+                  <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;. Their CP has increased to &quot;</span> <span style="color: #333333">+</span>
+                  <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]))
+            list_to_csv(playerInfo, <span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(currentPlayer) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>, <span style="background-color: #fff0f0">&#39;w&#39;</span>)
+        <span style="color: #008800; font-weight: bold">else</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;You don&#39;t have enough candies to level up&quot;</span>)
+    display_pokemon_info()
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">pokemon_battle</span>():
+    <span style="color: #DD4422">&quot;&quot;&quot;determines winning pokemon, prints winner&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">while</span> <span style="color: #007020">True</span>:
+        <span style="color: #008800; font-weight: bold">try</span>:
+            opponent <span style="color: #333333">=</span> <span style="color: #007020">input</span>(<span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">What player would you like to fight (type exit to return to main menu):&quot;</span>)
+            <span style="color: #008800; font-weight: bold">if</span> opponent <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;exit&#39;</span>:
+                main_menu()
+            opponent <span style="color: #333333">=</span> <span style="color: #007020">int</span>(opponent)
+            <span style="color: #007020">open</span>(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(opponent) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+            <span style="color: #008800; font-weight: bold">break</span>
+        <span style="color: #008800; font-weight: bold">except</span> FileNotFoundError:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;That player does not exist&quot;</span>)
+        <span style="color: #008800; font-weight: bold">except</span> <span style="color: #FF0000; font-weight: bold">ValueError</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Enter an integer&quot;</span>)
+    opponentList <span style="color: #333333">=</span> csv_to_list(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(opponent) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+
+    <span style="color: #008800; font-weight: bold">global</span> playerInfo
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span> <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; You are battling with: &quot;</span><span style="color: #333333">.</span>center(<span style="color: #0000DD; font-weight: bold">40</span>, <span style="background-color: #fff0f0">&quot;-&quot;</span>))
+    <span style="color: #008800; font-weight: bold">print</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>])
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;CP: &quot;</span>, playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>])
+
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot; Opponent Pokemon &quot;</span><span style="color: #333333">.</span>center(<span style="color: #0000DD; font-weight: bold">80</span>, <span style="background-color: #fff0f0">&#39;-&#39;</span>))
+    oppPokemon <span style="color: #333333">=</span> []
+    numOpponentPokemon <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+    <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">152</span> <span style="color: #333333">//</span> <span style="color: #0000DD; font-weight: bold">4</span>):
+        <span style="color: #008800; font-weight: bold">try</span>:
+            oppPokemon<span style="color: #333333">.</span>append(opponentList[i <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>])
+            oppPokemon<span style="color: #333333">.</span>append(opponentList[i <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>])
+        <span style="color: #008800; font-weight: bold">except</span> <span style="color: #FF0000; font-weight: bold">IndexError</span>:
+            <span style="color: #008800; font-weight: bold">if</span> numOpponentPokemon <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+                numOpponentPokemon <span style="color: #333333">=</span> i
+            oppPokemon<span style="color: #333333">.</span>append(<span style="background-color: #fff0f0">&quot;Empty&quot;</span>)
+            oppPokemon<span style="color: #333333">.</span>append(<span style="background-color: #fff0f0">&quot;N/A&quot;</span>)
+    index <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+    <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">152</span> <span style="color: #333333">//</span> <span style="color: #0000DD; font-weight: bold">4</span>):
+        <span style="color: #008800; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">5</span>):
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="color: #007020">str</span>(index <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;. {:&lt;20}&quot;</span><span style="color: #333333">.</span>format(oppPokemon[index <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>]), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+            index <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        index <span style="color: #333333">-=</span> <span style="color: #0000DD; font-weight: bold">4</span>
+        <span style="color: #008800; font-weight: bold">print</span>()
+        <span style="color: #008800; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">5</span>):
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;   CP: &quot;</span> <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;{:&lt;16}&quot;</span><span style="color: #333333">.</span>format(oppPokemon[index <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+            index <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span>)
+        <span style="color: #008800; font-weight: bold">if</span> oppPokemon[(index <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Empty&#39;</span> <span style="color: #000000; font-weight: bold">or</span> oppPokemon[index <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Empty&#39;</span>:
+            <span style="color: #008800; font-weight: bold">break</span>
+    <span style="color: #008800; font-weight: bold">print</span>((<span style="background-color: #fff0f0">&quot; Opponent has 1 - &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(numOpponentPokemon) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; to choose from &quot;</span>)<span style="color: #333333">.</span>center(<span style="color: #0000DD; font-weight: bold">80</span>, <span style="background-color: #fff0f0">&#39;-&#39;</span>))
+
+    <span style="color: #008800; font-weight: bold">while</span> <span style="color: #007020">True</span>:
+        <span style="color: #008800; font-weight: bold">try</span>:
+            opponentPokemon <span style="color: #333333">=</span> input_int(<span style="background-color: #fff0f0">&quot;Which would you like to fight:&quot;</span>) <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>
+            opponentList[opponentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span>]
+            <span style="color: #008800; font-weight: bold">break</span>
+        <span style="color: #008800; font-weight: bold">except</span> <span style="color: #FF0000; font-weight: bold">IndexError</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Invalid selection&quot;</span>)
+
+    <span style="color: #888888"># fight odds calculations</span>
+    <span style="color: #888888"># if player better than opp, .5 + (cp diff/player cp). if opp better than player, .5 + (cp diff/player cp). else .5</span>
+    <span style="color: #008800; font-weight: bold">if</span> <span style="color: #007020">int</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">&gt;</span> <span style="color: #007020">int</span>(opponentList[opponentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]):
+        odds <span style="color: #333333">=</span> <span style="color: #333333">.</span><span style="color: #0000DD; font-weight: bold">5</span> <span style="color: #333333">+</span> ((<span style="color: #007020">int</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">-</span> <span style="color: #007020">int</span>(opponentList[opponentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>])) <span style="color: #333333">/</span>
+                     <span style="color: #007020">int</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>])) <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">2</span>
+    <span style="color: #008800; font-weight: bold">elif</span> <span style="color: #007020">int</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">&lt;</span> <span style="color: #007020">int</span>(opponentList[opponentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]):
+        odds <span style="color: #333333">=</span> <span style="color: #333333">.</span><span style="color: #0000DD; font-weight: bold">5</span> <span style="color: #333333">-</span> (<span style="color: #007020">abs</span>((<span style="color: #007020">int</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">-</span> <span style="color: #007020">int</span>(opponentList[opponentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>])) <span style="color: #333333">/</span>
+                         <span style="color: #007020">int</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]))) <span style="color: #333333">/</span> <span style="color: #0000DD; font-weight: bold">2</span>
+    <span style="color: #008800; font-weight: bold">else</span>:
+        odds <span style="color: #333333">=</span> <span style="color: #333333">.</span><span style="color: #0000DD; font-weight: bold">5</span>
+    odds <span style="color: #333333">*=</span> <span style="color: #0000DD; font-weight: bold">100</span>
+    odds <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">10</span> <span style="color: #008800; font-weight: bold">if</span> odds <span style="color: #333333">&lt;=</span> <span style="color: #0000DD; font-weight: bold">10</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">90</span> <span style="color: #008800; font-weight: bold">if</span> odds <span style="color: #333333">&gt;=</span> <span style="color: #0000DD; font-weight: bold">90</span> <span style="color: #008800; font-weight: bold">else</span> odds  <span style="color: #888888"># balance odds if extremely high or low</span>
+
+    <span style="color: #008800; font-weight: bold">if</span> randint(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">100</span>) <span style="color: #333333">&lt;=</span> odds:
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">Your pokemon, &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;, won the fight against &quot;</span> <span style="color: #333333">+</span>
+              <span style="color: #007020">str</span>(opponentList[opponentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]))
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Your CP was &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; and theirs was &quot;</span> <span style="color: #333333">+</span>
+              <span style="color: #007020">str</span>(opponentList[opponentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;. Your odds to win were &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(<span style="color: #007020">round</span>(odds, <span style="color: #0000DD; font-weight: bold">2</span>)) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;%&quot;</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;You have been rewarded with 2 candies&quot;</span>)
+        update_candies(currentPlayer, <span style="color: #0000DD; font-weight: bold">2</span>)
+    <span style="color: #008800; font-weight: bold">else</span>:
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">Your pokemon, &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;, lost the fight against &quot;</span> <span style="color: #333333">+</span>
+              <span style="color: #007020">str</span>(opponentList[opponentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]))
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Your CP was &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; and theirs was &quot;</span> <span style="color: #333333">+</span>
+              <span style="color: #007020">str</span>(opponentList[opponentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;. Your odds to win were &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(<span style="color: #007020">round</span>(odds, <span style="color: #0000DD; font-weight: bold">2</span>)) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;%&quot;</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Better luck next time&quot;</span>)
+    main_menu()
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">main_menu</span>():
+    <span style="color: #DD4422">&quot;&quot;&quot;takes no input, prints out main menu and takes input from user&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">global</span> currentPlayer, currentPokemon, playerInfo
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span> <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; MAIN MENU &quot;</span><span style="color: #333333">.</span>center(<span style="color: #0000DD; font-weight: bold">80</span>, <span style="background-color: #fff0f0">&#39;-&#39;</span>))
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;1 - View current pokemon</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">2 - Catch a new pokemon</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">3 - Quick battle pokemon</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">4 - Battle Player vs. Player</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">5&quot;</span>
+          <span style="background-color: #fff0f0">&quot; - Select player</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">6 - Save and Exit</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&quot;</span>)
+    select <span style="color: #333333">=</span> input_int(<span style="background-color: #fff0f0">&quot;Enter your selection: &quot;</span>)
+    <span style="color: #008800; font-weight: bold">if</span> select <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>:
+        display_pokemon_info()
+    <span style="color: #008800; font-weight: bold">elif</span> select <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>:
+        pokemon_catch()
+    <span style="color: #008800; font-weight: bold">elif</span> select <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>:
+        pokemon_battle()
+    <span style="color: #008800; font-weight: bold">elif</span> select <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span>:
+        pvp()
+    <span style="color: #008800; font-weight: bold">elif</span> select <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">5</span>:
+        newPlayer <span style="color: #333333">=</span> input_int(<span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">Enter player: &quot;</span>)
+        currentPlayer <span style="color: #333333">=</span> newPlayer
+        currentPokemon <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+        playerInfo <span style="color: #333333">=</span> open_player(currentPlayer)
+        main_menu()
+    <span style="color: #008800; font-weight: bold">elif</span> select <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">6</span>:
+        list_to_csv(playerInfo, <span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(currentPlayer) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>, <span style="background-color: #fff0f0">&#39;w&#39;</span>)
+        <span style="color: #007020">exit</span>()
+    <span style="color: #008800; font-weight: bold">else</span>:
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Invalid selection&quot;</span>)
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">display_selection_menu</span>():
+    <span style="color: #DD4422">&quot;&quot;&quot;Print list of pokemon and their info&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">global</span> playerInfo, currentPokemon, playerPokemon
+    playerInfo <span style="color: #333333">=</span> csv_to_list(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(currentPlayer) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span> <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; Pokemon Selection Menu &quot;</span><span style="color: #333333">.</span>center(<span style="color: #0000DD; font-weight: bold">80</span>, <span style="background-color: #fff0f0">&quot;-&quot;</span>))
+    <span style="color: #008800; font-weight: bold">print</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Current CP: &quot;</span>, playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>])
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Current Level: &quot;</span>, playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>])
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Candies: &quot;</span>, get_candies(currentPlayer))
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;-&quot;</span> <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">80</span>)
+    display_pokemon(playerInfo)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;-&quot;</span> <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">80</span>)
+    <span style="color: #008800; font-weight: bold">while</span> <span style="color: #007020">True</span>:
+        currentPokemon <span style="color: #333333">=</span> input_int(<span style="background-color: #fff0f0">&quot;Enter which pokemon you would like to select:&quot;</span>) <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        <span style="color: #008800; font-weight: bold">if</span> playerPokemon[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&quot;Empty&quot;</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Invalid pokemon, select a filled slot&quot;</span>)
+        <span style="color: #008800; font-weight: bold">else</span>:
+            <span style="color: #008800; font-weight: bold">break</span>
+    display_pokemon_info()
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">display_pokemon_info</span>():
+    <span style="color: #DD4422">&quot;&quot;&quot;Print pokemon name, cp, level, candies, and user options&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">global</span> playerInfo, currentPokemon
+    playerInfo <span style="color: #333333">=</span> open_player(currentPlayer)
+    currentPokemon <span style="color: #333333">=</span> currentPokemon
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span> <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; Current Pokemon &quot;</span><span style="color: #333333">.</span>center(<span style="color: #0000DD; font-weight: bold">80</span>, <span style="background-color: #fff0f0">&quot;-&quot;</span>))
+    <span style="color: #008800; font-weight: bold">print</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Current CP: &quot;</span>, playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>])
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Current Level: &quot;</span>, playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>])
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Candies: &quot;</span>, get_candies(currentPlayer))
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">1 - Use Candy to Level-Up</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">2 - View Pokemon&#39;s moves</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">3 - Select different Pokemon</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">4 - Exit to Main Menu&quot;</span>)
+    <span style="color: #008800; font-weight: bold">while</span> <span style="color: #007020">True</span>:
+        select <span style="color: #333333">=</span> input_int(<span style="background-color: #fff0f0">&quot;Enter your selection:&quot;</span>)
+        <span style="color: #008800; font-weight: bold">if</span> select <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>:
+            level_up(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>])
+        <span style="color: #008800; font-weight: bold">elif</span> select <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>:
+            more_pokemon_info()
+        <span style="color: #008800; font-weight: bold">elif</span> select <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>:
+            display_selection_menu()
+        <span style="color: #008800; font-weight: bold">elif</span> select <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span>:
+            main_menu()
+        <span style="color: #008800; font-weight: bold">else</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Invalid selection&quot;</span>)
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">more_pokemon_info</span>():
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span> <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;Pokemon&#39;s Moves&quot;</span><span style="color: #333333">.</span>center(<span style="color: #0000DD; font-weight: bold">80</span>, <span style="background-color: #fff0f0">&quot;-&quot;</span>))
+    <span style="color: #008800; font-weight: bold">print</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">18</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>], <span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&quot;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Current CP: &quot;</span>, playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>])
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Current Level: &quot;</span>, playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">7</span>]), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">11</span>]), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">15</span>]), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">19</span>]))
+    <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">22</span>, <span style="color: #0000DD; font-weight: bold">4</span>):
+        <span style="color: #008800; font-weight: bold">if</span> playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Damage&#39;</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Dmg: {:&lt;25}&quot;</span><span style="color: #333333">.</span>format(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">18</span> <span style="color: #333333">+</span> i]), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+        <span style="color: #008800; font-weight: bold">elif</span> playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Skip&#39;</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Skip opponents move&quot;</span>), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+        <span style="color: #008800; font-weight: bold">elif</span> playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Down&#39;</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Reduce opp dmg by &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+        <span style="color: #008800; font-weight: bold">elif</span> playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Up&#39;</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Increase self dmg by &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+        <span style="color: #008800; font-weight: bold">elif</span> playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Heal&#39;</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Increase health by &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>()
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Cooldown: &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">6</span>])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Cooldown: &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">10</span>])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Cooldown: &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">14</span>])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Cooldown: &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerInfo[currentPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">18</span>])))
+    <span style="color: #007020">input</span>(<span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n\n</span><span style="background-color: #fff0f0">Press enter to return&quot;</span>)
+    display_pokemon_info()
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">open_player</span>(pl):
+    <span style="color: #DD4422">&quot;&quot;&quot;takes in player number, create a csv specific to player if new player, add player number to existing players,</span>
+<span style="color: #DD4422">    else open player file &quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">if</span> pl <span style="color: #000000; font-weight: bold">not</span> <span style="color: #000000; font-weight: bold">in</span> players:
+        players<span style="color: #333333">.</span>append(pl)
+        <span style="color: #008800; font-weight: bold">try</span>:
+            <span style="color: #007020">open</span>(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pl) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>, <span style="background-color: #fff0f0">&#39;x&#39;</span>)
+        <span style="color: #008800; font-weight: bold">except</span> FileExistsError:
+            <span style="color: #008800; font-weight: bold">return</span> csv_to_list(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pl) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+        add_pokemon()
+        <span style="color: #008800; font-weight: bold">try</span>:
+            <span style="color: #007020">open</span>(<span style="background-color: #fff0f0">&#39;candies&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(currentPlayer) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.txt&#39;</span>, <span style="background-color: #fff0f0">&#39;x&#39;</span>)
+            candiesFile <span style="color: #333333">=</span> <span style="color: #007020">open</span>(<span style="background-color: #fff0f0">&#39;candies&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(currentPlayer) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.txt&#39;</span>, <span style="background-color: #fff0f0">&#39;r+&#39;</span>)
+            candiesFile<span style="color: #333333">.</span>write(<span style="background-color: #fff0f0">&#39;0&#39;</span>)
+        <span style="color: #008800; font-weight: bold">except</span> FileExistsError:
+            candiesFile <span style="color: #333333">=</span> <span style="color: #007020">open</span>(<span style="background-color: #fff0f0">&#39;candies&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(currentPlayer) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.txt&#39;</span>, <span style="background-color: #fff0f0">&#39;r+&#39;</span>)
+        candiesFile<span style="color: #333333">.</span>close()
+        <span style="color: #008800; font-weight: bold">global</span> playerInfo
+        playerInfo <span style="color: #333333">=</span> csv_to_list(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pl) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Welcome new player! You were randomly given&quot;</span>, playerInfo[<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">21</span>])
+        <span style="color: #008800; font-weight: bold">return</span> csv_to_list(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pl) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+    <span style="color: #008800; font-weight: bold">else</span>:
+        <span style="color: #008800; font-weight: bold">return</span> csv_to_list(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pl) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">csv_to_list</span>(<span style="color: #007020">file</span>):
+    <span style="color: #DD4422">&quot;&quot;&quot;takes in a csv file, returns the contents of the file as a list&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">csv</span> <span style="color: #008800; font-weight: bold">import</span> reader
+    <span style="color: #008800; font-weight: bold">with</span> <span style="color: #007020">open</span>(<span style="color: #007020">file</span>, <span style="background-color: #fff0f0">&#39;r&#39;</span>, newline<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>) <span style="color: #008800; font-weight: bold">as</span> csvfile:
+        reader <span style="color: #333333">=</span> reader(csvfile, delimiter<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;,&#39;</span>)
+        listInfo <span style="color: #333333">=</span> []
+        <span style="color: #008800; font-weight: bold">for</span> row <span style="color: #000000; font-weight: bold">in</span> reader:
+            listInfo <span style="color: #333333">+=</span> row
+    <span style="color: #008800; font-weight: bold">return</span> listInfo
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">list_to_csv</span>(listInfo, <span style="color: #007020">file</span>, write<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;a&#39;</span>):
+    <span style="color: #DD4422">&quot;&quot;&quot;takes in a list, a target file, and whether to append or write over, breaks up the contents of the list and</span>
+<span style="color: #DD4422">    APPENDS or WRITES OVER them to the target file&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">csv</span> <span style="color: #008800; font-weight: bold">import</span> writer, QUOTE_MINIMAL
+    <span style="color: #008800; font-weight: bold">with</span> <span style="color: #007020">open</span>(<span style="color: #007020">file</span>, write, newline<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>) <span style="color: #008800; font-weight: bold">as</span> csvfile:
+        writer <span style="color: #333333">=</span> writer(csvfile, delimiter<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;,&#39;</span>, quotechar<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;|&#39;</span>, quoting<span style="color: #333333">=</span>QUOTE_MINIMAL)
+        writer<span style="color: #333333">.</span>writerow(listInfo)
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">update_candies</span>(pl, change):
+    <span style="color: #DD4422">&quot;&quot;&quot;takes in the current player and the amount of change to the candies, opens player candy file, adds change</span>
+<span style="color: #DD4422">     to candies and rewrites&quot;&quot;&quot;</span>
+    <span style="color: #007020">file</span> <span style="color: #333333">=</span> <span style="color: #007020">open</span>(<span style="background-color: #fff0f0">&#39;candies&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pl) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.txt&#39;</span>, <span style="background-color: #fff0f0">&#39;r+&#39;</span>)
+    candy <span style="color: #333333">=</span> get_candies(pl)
+    <span style="color: #007020">file</span><span style="color: #333333">.</span>truncate(<span style="color: #0000DD; font-weight: bold">0</span>)
+    <span style="color: #007020">file</span><span style="color: #333333">.</span>write(<span style="color: #007020">str</span>(<span style="color: #007020">int</span>(candy) <span style="color: #333333">+</span> <span style="color: #007020">int</span>(change)))
+    <span style="color: #007020">file</span><span style="color: #333333">.</span>close()
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">get_candies</span>(pl):
+    <span style="color: #DD4422">&quot;&quot;&quot;takes in the current player, opens player candy file, returns the amount of candies written in file&quot;&quot;&quot;</span>
+    <span style="color: #007020">file</span> <span style="color: #333333">=</span> <span style="color: #007020">open</span>(<span style="background-color: #fff0f0">&#39;candies&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pl) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.txt&#39;</span>)
+    candy <span style="color: #333333">=</span> <span style="color: #007020">int</span>(<span style="color: #007020">file</span><span style="color: #333333">.</span>read())
+    <span style="color: #007020">file</span><span style="color: #333333">.</span>close()
+    <span style="color: #008800; font-weight: bold">return</span> candy
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">input_int</span>(message):
+    <span style="color: #DD4422">&quot;&quot;&quot;take in a message, tries to take a value, if the value is not an int print message&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">while</span> <span style="color: #007020">True</span>:
+        <span style="color: #008800; font-weight: bold">try</span>:
+            value <span style="color: #333333">=</span> <span style="color: #007020">int</span>(<span style="color: #007020">input</span>(message))
+            <span style="color: #008800; font-weight: bold">break</span>
+        <span style="color: #008800; font-weight: bold">except</span> <span style="color: #FF0000; font-weight: bold">ValueError</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Enter an integer&quot;</span>)
+    <span style="color: #008800; font-weight: bold">return</span> value
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">add_pokemon</span>():
+    <span style="color: #DD4422">&quot;&quot;&quot;randomly select a pokemon and moves from the csv files and add them to the players file&quot;&quot;&quot;</span>
+    pokemonMoves <span style="color: #333333">=</span> []
+    added <span style="color: #333333">=</span> []
+    <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">4</span>):
+        k <span style="color: #333333">=</span> randint(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">40</span>)
+        added<span style="color: #333333">.</span>append(k)
+        <span style="color: #008800; font-weight: bold">while</span> k <span style="color: #000000; font-weight: bold">in</span> added:
+            k <span style="color: #333333">=</span> randint(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">40</span>)
+        pokemonMoves<span style="color: #333333">.</span>append(moves[k <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">4</span>])
+        pokemonMoves<span style="color: #333333">.</span>append(moves[k <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">4</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>])
+        pokemonMoves<span style="color: #333333">.</span>append(moves[k <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">4</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">2</span>])
+        pokemonMoves<span style="color: #333333">.</span>append(moves[k <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">4</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">3</span>])
+    i <span style="color: #333333">=</span> randint(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">151</span>) <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">4</span>
+    list_to_csv([pokemon[i], pokemon[i <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>], pokemon[i <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">2</span>], pokemon[i <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">3</span>], randint(<span style="color: #007020">int</span>(pokemon[i <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">2</span>]),
+                                                                                     <span style="color: #007020">int</span>(pokemon[i <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">3</span>])), <span style="color: #0000DD; font-weight: bold">1</span>,
+                 pokemonMoves[<span style="color: #0000DD; font-weight: bold">0</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">1</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">2</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">3</span>],
+                 pokemonMoves[<span style="color: #0000DD; font-weight: bold">4</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">5</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">6</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">7</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">8</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">9</span>],
+                 pokemonMoves[<span style="color: #0000DD; font-weight: bold">10</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">11</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">12</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">13</span>],
+                 pokemonMoves[<span style="color: #0000DD; font-weight: bold">14</span>], pokemonMoves[<span style="color: #0000DD; font-weight: bold">15</span>]], <span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(currentPlayer) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">display_pokemon</span>(playerList):
+    <span style="color: #DD4422">&quot;&quot;&quot;take in players list of pokemon and print out formatted list&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">global</span> playerPokemon
+    playerPokemon <span style="color: #333333">=</span> []
+    <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">152</span> <span style="color: #333333">//</span> <span style="color: #0000DD; font-weight: bold">4</span>):
+        <span style="color: #008800; font-weight: bold">try</span>:
+            playerPokemon<span style="color: #333333">.</span>append(playerList[i <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>])
+            playerPokemon<span style="color: #333333">.</span>append(playerList[i <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>])
+        <span style="color: #008800; font-weight: bold">except</span> <span style="color: #FF0000; font-weight: bold">IndexError</span>:
+            playerPokemon<span style="color: #333333">.</span>append(<span style="background-color: #fff0f0">&quot;Empty&quot;</span>)
+            playerPokemon<span style="color: #333333">.</span>append(<span style="background-color: #fff0f0">&quot;N/A&quot;</span>)
+    index <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+    <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">152</span> <span style="color: #333333">//</span> <span style="color: #0000DD; font-weight: bold">4</span>):
+        <span style="color: #008800; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">5</span>):
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;20}&quot;</span><span style="color: #333333">.</span>format(<span style="color: #007020">str</span>(index <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;. &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerPokemon[index <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+            index <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        index <span style="color: #333333">-=</span> <span style="color: #0000DD; font-weight: bold">4</span>
+        <span style="color: #008800; font-weight: bold">print</span>()
+        <span style="color: #008800; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">5</span>):
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;20}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;   CP: &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(playerPokemon[index <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+            index <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span>)
+        <span style="color: #008800; font-weight: bold">if</span> playerPokemon[(index <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Empty&#39;</span> <span style="color: #000000; font-weight: bold">or</span> playerPokemon[index <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Empty&#39;</span>:
+            <span style="color: #008800; font-weight: bold">break</span>  <span style="color: #888888"># will display all of your collection until a row ends or starts with an &#39;Empty&#39;</span>
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">pvp</span>():
+    <span style="color: #DD4422">&quot;&quot;&quot;runs player vs player pokemon battle using players moves and cp found in player csv files&quot;&quot;&quot;</span>
+    <span style="color: #888888"># setup</span>
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">Two players will now be able to player against each other, decide who is player 1 and player 2</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&quot;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;PLAYER 1&quot;</span><span style="color: #333333">.</span>center(<span style="color: #0000DD; font-weight: bold">40</span>, <span style="background-color: #fff0f0">&#39;-&#39;</span>))
+    <span style="color: #008800; font-weight: bold">while</span> <span style="color: #007020">True</span>:
+        <span style="color: #008800; font-weight: bold">try</span>:
+            player1 <span style="color: #333333">=</span> <span style="color: #007020">input</span>(<span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">Enter the first player (type exit to return to main menu):&quot;</span>)
+            <span style="color: #008800; font-weight: bold">if</span> player1 <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;exit&#39;</span>:
+                main_menu()
+            player1 <span style="color: #333333">=</span> <span style="color: #007020">int</span>(player1)
+            <span style="color: #007020">open</span>(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(player1) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+            <span style="color: #008800; font-weight: bold">break</span>
+        <span style="color: #008800; font-weight: bold">except</span> FileNotFoundError:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;That player does not exist&quot;</span>)
+        <span style="color: #008800; font-weight: bold">except</span> <span style="color: #FF0000; font-weight: bold">ValueError</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Enter an integer&quot;</span>)
+    player1Info <span style="color: #333333">=</span> csv_to_list(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(player1) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>()
+    display_pokemon(player1Info)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;-&quot;</span> <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">80</span>)
+    <span style="color: #008800; font-weight: bold">while</span> <span style="color: #007020">True</span>:
+        player1Pokemon <span style="color: #333333">=</span> input_int(<span style="background-color: #fff0f0">&quot;Enter which pokemon you would like to select:&quot;</span>) <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        <span style="color: #008800; font-weight: bold">if</span> playerPokemon[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&quot;Empty&quot;</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Invalid pokemon, select a filled slot&quot;</span>)
+        <span style="color: #008800; font-weight: bold">else</span>:
+            <span style="color: #008800; font-weight: bold">break</span>
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Player 1 has selected a level &quot;</span> <span style="color: #333333">+</span> player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; &quot;</span> <span style="color: #333333">+</span>
+          player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; with a CP of &quot;</span> <span style="color: #333333">+</span> player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span>)
+
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;PLAYER 2&quot;</span><span style="color: #333333">.</span>center(<span style="color: #0000DD; font-weight: bold">40</span>, <span style="background-color: #fff0f0">&#39;-&#39;</span>))
+    <span style="color: #008800; font-weight: bold">while</span> <span style="color: #007020">True</span>:
+        <span style="color: #008800; font-weight: bold">try</span>:
+            player2 <span style="color: #333333">=</span> <span style="color: #007020">input</span>(<span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">Enter the second player (type exit to return to main menu):&quot;</span>)
+            <span style="color: #008800; font-weight: bold">if</span> player2 <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;exit&#39;</span>:
+                main_menu()
+            player2 <span style="color: #333333">=</span> <span style="color: #007020">int</span>(player2)
+            <span style="color: #007020">open</span>(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(player2) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+            <span style="color: #008800; font-weight: bold">break</span>
+        <span style="color: #008800; font-weight: bold">except</span> FileNotFoundError:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;That player does not exist&quot;</span>)
+        <span style="color: #008800; font-weight: bold">except</span> <span style="color: #FF0000; font-weight: bold">ValueError</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Enter an integer&quot;</span>)
+    player2Info <span style="color: #333333">=</span> csv_to_list(<span style="background-color: #fff0f0">&#39;player&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(player2) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;.csv&#39;</span>)
+    <span style="color: #008800; font-weight: bold">print</span>()
+    display_pokemon(player2Info)
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;-&quot;</span> <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">80</span>)
+    <span style="color: #008800; font-weight: bold">while</span> <span style="color: #007020">True</span>:
+        player2Pokemon <span style="color: #333333">=</span> input_int(<span style="background-color: #fff0f0">&quot;Enter which pokemon you would like to select:&quot;</span>) <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        <span style="color: #008800; font-weight: bold">if</span> playerPokemon[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&quot;Empty&quot;</span>:
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Invalid pokemon, select a filled slot&quot;</span>)
+        <span style="color: #008800; font-weight: bold">else</span>:
+            <span style="color: #008800; font-weight: bold">break</span>
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Player 2 has selected a level &quot;</span> <span style="color: #333333">+</span> player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">5</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; &quot;</span> <span style="color: #333333">+</span>
+          player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; with a CP of &quot;</span> <span style="color: #333333">+</span> player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span>)
+
+    <span style="color: #008800; font-weight: bold">print</span>(player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; vs. &quot;</span> <span style="color: #333333">+</span> player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>])
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Let the fight begin!&quot;</span> <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&quot;</span> <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;-&#39;</span> <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">50</span>)
+
+    <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Players will take turns using moves to deal damage or affect the match. Pokemon&#39;s CP will be their health</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&quot;</span>)
+
+    <span style="color: #888888"># players pokemon vars setup</span>
+    player1Health <span style="color: #333333">=</span> <span style="color: #007020">int</span>(player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>])  <span style="color: #888888"># set cp to health</span>
+    player2Health <span style="color: #333333">=</span> <span style="color: #007020">int</span>(player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">4</span>])
+    player1Dmg <span style="color: #333333">=</span> [<span style="color: #007020">int</span>(player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">9</span>]), <span style="color: #007020">int</span>(player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">13</span>]),
+                  <span style="color: #007020">int</span>(player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">17</span>]), <span style="color: #007020">int</span>(player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">21</span>])]
+    player2Dmg <span style="color: #333333">=</span> [<span style="color: #007020">int</span>(player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">9</span>]), <span style="color: #007020">int</span>(player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">13</span>]),
+                  <span style="color: #007020">int</span>(player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">17</span>]), <span style="color: #007020">int</span>(player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">21</span>])]
+    player1Cooldowns <span style="color: #333333">=</span> [<span style="color: #007020">int</span>(player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">6</span>]), <span style="color: #007020">int</span>(player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">10</span>]),
+                        <span style="color: #007020">int</span>(player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">14</span>]), <span style="color: #007020">int</span>(player1Info[player1Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">18</span>])]
+    player2Cooldowns <span style="color: #333333">=</span> [<span style="color: #007020">int</span>(player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">6</span>]), <span style="color: #007020">int</span>(player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">10</span>]),
+                        <span style="color: #007020">int</span>(player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">14</span>]), <span style="color: #007020">int</span>(player2Info[player2Pokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">18</span>])]
+    player1CurrentCooldown <span style="color: #333333">=</span> [<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>]
+    player2CurrentCooldown <span style="color: #333333">=</span> [<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>]
+    skip <span style="color: #333333">=</span> <span style="color: #007020">False</span>
+
+    <span style="color: #888888"># fight</span>
+    <span style="color: #008800; font-weight: bold">while</span> player1Health <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #000000; font-weight: bold">and</span> player2Health <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+        [player1Info, player1Pokemon, player1Health, player1Dmg, player1CurrentCooldown, player2Info, player2Pokemon,
+         player2Health, player2Dmg, skip] <span style="color: #333333">=</span> player_turn(player1Info, player1Pokemon, player1Health, player1Dmg,
+                                                        player1CurrentCooldown, player2Info, player2Pokemon,
+                                                        player2Health, player2Dmg, <span style="background-color: #fff0f0">&#39;1&#39;</span>, <span style="background-color: #fff0f0">&#39;2&#39;</span>, skip, player1Cooldowns,
+                                                        player2)
+        [player2Info, player2Pokemon, player2Health, player2Dmg, player2CurrentCooldown, player1Info, player1Pokemon,
+         player1Health, player1Dmg, skip] <span style="color: #333333">=</span> player_turn(player2Info, player2Pokemon, player2Health, player2Dmg,
+                                                        player2CurrentCooldown, player1Info, player1Pokemon,
+                                                        player1Health, player1Dmg, <span style="background-color: #fff0f0">&#39;2&#39;</span>, <span style="background-color: #fff0f0">&#39;1&#39;</span>, skip, player2Cooldowns,
+                                                        player1)
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">player_turn</span>(pInfo, pPokemon, pHealth, pDmg, pCCd, oInfo, oPokemon, oHealth, oDmg, pNum, oNum, skipped, pCd,
+                oPlayerNum):
+    <span style="color: #008800; font-weight: bold">if</span> pHealth <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #000000; font-weight: bold">and</span> <span style="color: #000000; font-weight: bold">not</span> skipped <span style="color: #000000; font-weight: bold">and</span> <span style="color: #000000; font-weight: bold">not</span> (pCCd[<span style="color: #0000DD; font-weight: bold">0</span>] <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #000000; font-weight: bold">and</span> pCCd[<span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #000000; font-weight: bold">and</span> pCCd[<span style="color: #0000DD; font-weight: bold">2</span>] <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #000000; font-weight: bold">and</span> pCCd[<span style="color: #0000DD; font-weight: bold">3</span>] <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">0</span>):
+        <span style="color: #008800; font-weight: bold">print</span>((<span style="background-color: #fff0f0">&quot;PLAYER &quot;</span> <span style="color: #333333">+</span> pNum)<span style="color: #333333">.</span>center(<span style="color: #0000DD; font-weight: bold">50</span>, <span style="background-color: #fff0f0">&#39;-&#39;</span>))
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&gt;47}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;P&quot;</span> <span style="color: #333333">+</span> oNum <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;: &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(oInfo[oPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>])) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&quot;</span> <span style="color: #333333">+</span>
+              <span style="background-color: #fff0f0">&quot;{:&gt;43}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;HP: &quot;</span> <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;{:&gt;3}&quot;</span><span style="color: #333333">.</span>format(<span style="color: #007020">str</span>(oHealth))))
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&gt;22}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;P&quot;</span> <span style="color: #333333">+</span> pNum <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;: &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>])) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&quot;</span> <span style="color: #333333">+</span>
+              <span style="background-color: #fff0f0">&quot;{:&gt;18}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;HP: &quot;</span> <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;{:&gt;3}&quot;</span><span style="color: #333333">.</span>format(<span style="color: #007020">str</span>(pHealth))))
+        <span style="color: #008800; font-weight: bold">print</span>()
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;1. &quot;</span> <span style="color: #333333">+</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">7</span>]), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;2. &quot;</span> <span style="color: #333333">+</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">11</span>]), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;3. &quot;</span> <span style="color: #333333">+</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">15</span>]), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;4. &quot;</span> <span style="color: #333333">+</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">19</span>]))
+        k <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+        <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">9</span>, <span style="color: #0000DD; font-weight: bold">22</span>, <span style="color: #0000DD; font-weight: bold">4</span>):
+            <span style="color: #008800; font-weight: bold">if</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Damage&#39;</span>:
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Dmg: {:&lt;25}&quot;</span><span style="color: #333333">.</span>format(pDmg[k]), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+            <span style="color: #008800; font-weight: bold">elif</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Skip&#39;</span>:
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Skip opponents move&quot;</span>), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+            <span style="color: #008800; font-weight: bold">elif</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Down&#39;</span>:
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Reduce opp dmg by &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+            <span style="color: #008800; font-weight: bold">elif</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Up&#39;</span>:
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Increase self dmg by &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+            <span style="color: #008800; font-weight: bold">elif</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Heal&#39;</span>:
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Increase health by &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> i])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+            k <span style="color: #333333">+=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        <span style="color: #008800; font-weight: bold">print</span>()
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Cooldown: &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pCCd[<span style="color: #0000DD; font-weight: bold">0</span>])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Cooldown: &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pCCd[<span style="color: #0000DD; font-weight: bold">1</span>])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Cooldown: &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pCCd[<span style="color: #0000DD; font-weight: bold">2</span>])), end<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;{:&lt;30}&quot;</span><span style="color: #333333">.</span>format(<span style="background-color: #fff0f0">&quot;Cooldown: &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pCCd[<span style="color: #0000DD; font-weight: bold">3</span>])))
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span>)
+        <span style="color: #008800; font-weight: bold">while</span> <span style="color: #007020">True</span>:
+            pMove <span style="color: #333333">=</span> input_int(<span style="background-color: #fff0f0">&quot;Select your move:&quot;</span>)
+            <span style="color: #008800; font-weight: bold">if</span> <span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #333333">&lt;=</span> pMove <span style="color: #333333">&lt;=</span> <span style="color: #0000DD; font-weight: bold">4</span> <span style="color: #000000; font-weight: bold">and</span> pCCd[pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+                pMoveDmg <span style="color: #333333">=</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>
+                pMove <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">9</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">13</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">17</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">21</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">0</span>
+                <span style="color: #008800; font-weight: bold">break</span>
+            <span style="color: #008800; font-weight: bold">elif</span> <span style="color: #000000; font-weight: bold">not</span> pCCd[pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+                pMove <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">9</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">13</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">17</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">21</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">0</span>
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">2</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; still has a cooldown of &quot;</span> <span style="color: #333333">+</span>
+                      <span style="color: #007020">str</span>(pCCd[pMove <span style="color: #333333">//</span> <span style="color: #0000DD; font-weight: bold">4</span> <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">2</span>]))
+            <span style="color: #008800; font-weight: bold">else</span>:
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Invalid selection&quot;</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&quot;</span>)
+
+        <span style="color: #888888"># apply damage and changes from player move</span>
+        <span style="color: #008800; font-weight: bold">if</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Damage&#39;</span>:
+            num <span style="color: #333333">=</span> randint(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">100</span>)
+            <span style="color: #008800; font-weight: bold">if</span> num <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">20</span>:
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; has used &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                    pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">2</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;, but has missed!&quot;</span>)
+            <span style="color: #008800; font-weight: bold">elif</span> num <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">90</span>:
+                oHealth <span style="color: #333333">-=</span> <span style="color: #007020">int</span>(<span style="color: #6600EE; font-weight: bold">1.2</span> <span style="color: #333333">*</span> (<span style="color: #007020">int</span>(pDmg[pMoveDmg])))
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; has used &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                    pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMoveDmg <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">2</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;, hitting a CRITICAL HIT for &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                    <span style="color: #007020">int</span>(<span style="color: #6600EE; font-weight: bold">1.2</span> <span style="color: #333333">*</span> (<span style="color: #007020">int</span>(pDmg[pMoveDmg])))) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; damage!&quot;</span>)
+            <span style="color: #008800; font-weight: bold">else</span>:
+                oHealth <span style="color: #333333">-=</span> <span style="color: #007020">int</span>(pDmg[pMoveDmg])
+                <span style="color: #008800; font-weight: bold">print</span>(<span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; has used &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                    pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">2</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;, hitting &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                    oInfo[oPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; for &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pDmg[pMoveDmg]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; damage!&quot;</span>)
+        <span style="color: #008800; font-weight: bold">elif</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Skip&#39;</span>:
+            skipped <span style="color: #333333">=</span> <span style="color: #007020">True</span>
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; has used &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">2</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; causing &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                oInfo[oPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; to skip their move!&quot;</span>)
+        <span style="color: #008800; font-weight: bold">elif</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Heal&#39;</span>:
+            pHealth <span style="color: #333333">+=</span> <span style="color: #007020">int</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove])
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; has used &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">2</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; increasing their health by &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove]))
+        <span style="color: #008800; font-weight: bold">elif</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Down&#39;</span>:
+            <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #007020">len</span>(oDmg)):
+                oDmg[i] <span style="color: #333333">-=</span> <span style="color: #007020">int</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove])
+                <span style="color: #008800; font-weight: bold">if</span> oDmg[i] <span style="color: #333333">&lt;=</span> <span style="color: #0000DD; font-weight: bold">5</span>:
+                    oDmg[i] <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">5</span>
+            <span style="color: #008800; font-weight: bold">print</span>(<span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; has used &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">2</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; taking &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; damage from all of &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                oInfo[oPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\&#39;</span><span style="background-color: #fff0f0">s moves!&quot;</span>)
+        <span style="color: #008800; font-weight: bold">elif</span> pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">18</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;Up&#39;</span>:
+            <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #007020">len</span>(pDmg)):
+                pDmg[i] <span style="color: #333333">+=</span> <span style="color: #007020">int</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove])
+            <span style="color: #008800; font-weight: bold">print</span>(
+                <span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; has used &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">2</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; adding &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(
+                    pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> pMove]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; damage to all of their moves!&quot;</span>)
+        pMove <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">9</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">2</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">13</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">3</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">17</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">4</span> <span style="color: #008800; font-weight: bold">if</span> pMove <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">21</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0000DD; font-weight: bold">0</span>
+        <span style="color: #008800; font-weight: bold">for</span> move <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #007020">len</span>(pCCd)):
+            <span style="color: #008800; font-weight: bold">if</span> move <span style="color: #333333">==</span> pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>:
+                pCCd[pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">=</span> pCd[pMove <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>]
+            <span style="color: #008800; font-weight: bold">elif</span> <span style="color: #000000; font-weight: bold">not</span> pCCd[move] <span style="color: #333333">&lt;=</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+                pCCd[move] <span style="color: #333333">-=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+    <span style="color: #008800; font-weight: bold">elif</span> pHealth <span style="color: #333333">&lt;</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Player &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(oNum) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; and &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(oInfo[oPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; have won the fight!&quot;</span>)
+        update_candies(oPlayerNum, <span style="color: #0000DD; font-weight: bold">10</span>)
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;Player &quot;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(oNum) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; has been awarded 10 candies!&quot;</span>)
+        main_menu()
+    <span style="color: #008800; font-weight: bold">elif</span> pCCd[<span style="color: #0000DD; font-weight: bold">0</span>] <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #000000; font-weight: bold">and</span> pCCd[<span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #000000; font-weight: bold">and</span> pCCd[<span style="color: #0000DD; font-weight: bold">2</span>] <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #000000; font-weight: bold">and</span> pCCd[<span style="color: #0000DD; font-weight: bold">3</span>] <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&#39;</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">&#39;</span> <span style="color: #333333">+</span> <span style="color: #007020">str</span>(pInfo[pPokemon <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">22</span> <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>]) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; has no moves ready and has been skipped!&quot;</span>)
+        <span style="color: #008800; font-weight: bold">for</span> move <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #007020">len</span>(pCCd)):
+            <span style="color: #008800; font-weight: bold">if</span> <span style="color: #000000; font-weight: bold">not</span> pCCd[move] <span style="color: #333333">&lt;=</span> <span style="color: #0000DD; font-weight: bold">0</span>:
+                pCCd[move] <span style="color: #333333">-=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+    <span style="color: #008800; font-weight: bold">else</span>:
+        skipped <span style="color: #333333">=</span> <span style="color: #007020">False</span>
+    <span style="color: #008800; font-weight: bold">return</span> [pInfo, pPokemon, pHealth, pDmg, pCCd, oInfo, oPokemon, oHealth, oDmg, skipped]
+
+
+<span style="color: #888888"># --- get csv data --- #</span>
+pokemon <span style="color: #333333">=</span> csv_to_list(<span style="background-color: #fff0f0">&#39;PokeList_v2.csv&#39;</span>)
+moves <span style="color: #333333">=</span> csv_to_list(<span style="background-color: #fff0f0">&#39;PokemonMoves.csv&#39;</span>)
+moves[<span style="color: #0000DD; font-weight: bold">0</span>] <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>  <span style="color: #888888"># fixes first item of csv being written as &gt;&gt;?1</span>
+
+<span style="color: #888888"># --- setup --- #</span>
+players <span style="color: #333333">=</span> []
+playerPokemon <span style="color: #333333">=</span> []
+currentPokemon <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>
+currentPlayer <span style="color: #333333">=</span> input_int(<span style="background-color: #fff0f0">&quot;Enter player number:&quot;</span>)
+playerInfo <span style="color: #333333">=</span> open_player(currentPlayer)
+
+<span style="color: #888888"># --- main --- #</span>
+<span style="color: #008800; font-weight: bold">while</span> <span style="color: #007020">True</span>:
+    main_menu()
+</pre></td></tr></table></div>
+
+
+<br>
+</div>
+</body>
+</html>

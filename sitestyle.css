@@ -1,0 +1,648 @@
+@charset "utf-8";
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+.navbar img {
+  float: left;
+  width: 40px;
+  height: 35px;
+  margin: 5px 20px 4px 12px;
+}
+.navbar a.active {
+  background-color: #469FAF;
+}
+.navbar {
+  background-color: #333;
+  box-shadow: 0px 4px 12px 2px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.navbar .logo {
+  float: left;
+  text-decoration: none;
+   padding: 0px 0px;
+}
+.navbar .logo:hover {
+  float: left;
+  text-decoration: none;
+  background-color: #333;
+ 
+}
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 7px 6px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: #CCC;
+  color: #333;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.about img {
+  border-radius: 50%;
+}
+.about p {
+  font-size: 20px;
+  color: black;
+  text-align: left;
+  padding: 14px 16px;
+  text-decoration: none;
+  width: 800px;
+}
+.about {
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 21px 13px 12px 1px rgba(0, 0, 0, 0.2);
+}
+.about .container {
+  display: flex;
+  align-content: center;
+  width: 1000px;
+  margin: 20px auto;
+}
+.skills .container img {
+  width: 150px;
+}
+.skills .container {
+  margin: auto;
+  width: 930px;
+  padding: 50px 0px 80px;
+}
+.skills .container p {
+  width: 150px;
+  text-align: center;
+}
+.skills .container .lang, .skills .container .tools, .skills .container .frameworks {
+  float: left;
+  padding: 0px 80px;
+  width: 150px;
+}
+.header {
+  background-image: url("images/bkgImg.jpg");
+  height: 95%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: auto;
+  display: block;
+}
+.header .headerText {
+  width: 100%;
+  height: 50%;
+  text-align: center;
+}
+.headerText {
+  overflow: hidden;
+  color: #16151F;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-bottom: 300px;
+}
+.header .headerText h1 {
+  padding-top: 5%;
+  font-size: 80px;
+}
+.header .headerText h2 {
+  font-size: 26px;
+  font-weight: 100;
+  margin-top: -40px;
+}
+.skills {
+  background-color: #2E6FA7;
+  overflow: hidden;
+}
+.skills p {
+  color: white;
+}
+.footer p {
+  text-align: center;
+}
+.contactHome h1, .contactHome p {
+  text-align: center;
+  color: white;
+  margin: 0px;
+  font-family: inherit;
+}
+.contactHome h1 {
+  padding-top: 15px;
+  font-size: 50px;
+}
+.contactHome p {
+  padding-bottom: 5px;
+	margin-top: -3px;
+	font-size: 18px;
+}
+.contactHome {
+  background-color: #2E6FA7;
+  overflow: hidden;
+}
+.contactHome img {
+  width: 50px;
+  height: 50px;
+  padding: 0px 10px 15px 10px;
+}
+.contactHome .icons {
+  width: 218px;
+  margin: auto;
+}
+.contactHome hr {
+  width: 100px;
+  margin-bottom: 20px;
+  height: 2px;
+  background: white;
+}
+.gallery h2 {
+  padding: 1px;
+}
+.gallery img {
+  vertical-align: middle;
+}
+/* Position the image container (needed to position the left and right arrows) */
+.gallery .container {
+  position: relative;
+  width: 30%;
+  margin: 20px auto;
+}
+/* Hide the images by default */
+.gallery .mySlides {
+  display: none;
+}
+/* Add a pointer when hovering over the thumbnail images */
+.gallery .cursor {
+  cursor: pointer;
+}
+/* Next & previous buttons */
+.gallery .prev, .gallery .next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: #828282;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+/* Position the "next button" to the right */
+.gallery .next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+/* On hover, add a black background color with a little bit see-through */
+.gallery .prev:hover, .gallery .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+/* Number text (1/3 etc) */
+.gallery .numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+/* Container for image text */
+.gallery .caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+  font-family: inherit;
+  font-size: 18px;
+}
+.gallery .row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Six columns side by side */
+.gallery .column {
+  float: left;
+  width: 16.66%;
+}
+/* Add a transparency effect for thumnbail images */
+.gallery .demo {
+  opacity: 0.6;
+}
+.gallery .active, .gallery .demo:hover {
+  opacity: 1;
+}
+.gallery h2 {
+  text-align: center;
+  color: black;
+  margin: 0px;
+  font-family: inherit;
+  padding-top: 15px;
+  font-size: 35px;
+}
+.gallery hr {
+  background: black;
+  width: 80px;
+  height: 2px;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+.about h2 {
+  text-align: center;
+  color: black;
+  margin: 0px;
+  font-family: inherit;
+  padding-top: 15px;
+  font-size: 35px;
+}
+.about hr {
+  background: black;
+  width: 80px;
+  height: 2px;
+  margin-bottom: -30px;
+  margin-top: 5px;
+}
+.contact input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+.contact input[type=submit] {
+  background-color: #2E6FA7;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.contact input[type=submit]:hover {
+  background-color: #45a049;
+}
+.contact .container {
+  border-radius: 5px;
+  background-color: white;
+  padding: 20px;
+}
+.skills h2 {
+  text-align: center;
+  color: white;
+  margin: 0px;
+  font-family: inherit;
+  padding-top: 15px;
+  font-size: 35px;
+}
+.skills hr {
+  background: white;
+  width: 80px;
+  height: 1px;
+  margin-bottom: -30px;
+  margin-top: 5px;
+}
+
+
+.galleryProj a{
+	text-decoration: none;
+}
+
+
+/* Center website */
+.galleryProj .add .main {
+  max-width: 1000px;
+  margin: auto;
+}
+.galleryProj .add h1 {
+  font-size: 50px;
+  word-break: break-all;
+	text-decoration: none;
+}
+
+/* Create four equal columns that floats next to each other */
+.galleryProj .add .column {
+  float: left;
+  width: 23%;
+}
+/* Clear floats after rows */
+.galleryProj .add .row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Content */
+.galleryProj .add .content {
+  padding: 10px;
+ height: 275px;
+}
+
+.galleryProj h3 {
+	color: white;
+}
+
+.galleryProj hr{
+  float: left;
+  background: black;
+  width: 60px;
+  height: 2px;
+  margin: -8px 5px 0px 0px;
+}
+
+.galleryProj h2{
+	font-size: 30px;
+}
+
+.galleryProj .content{
+	position: relative;
+}
+
+.galleryProj .content img{
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.galleryProj .content .overlay{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(120,120,120,0.93);
+	overflow: hidden;
+	width: 0;
+	margin-bottom: 20px;
+	transition: .5s ease;
+}
+
+.galleryProj .content:hover .overlay{
+	width:200px;
+	height: 275px;
+}
+.galleryProj .text{
+	color: white;
+	font-size: 17px;
+	position: absolute;
+	width: 90%;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.major .content:hover{
+	cursor: pointer;
+}
+
+.messageRec .content{
+	width: 400px;
+	margin: auto;
+}
+
+.messageRec .content h2{
+	padding-top: 12px;
+	color: white;
+	text-align: center;
+}
+.messageRec .content .image{
+	margin: auto;
+	width: 30%;
+}
+.messageRec .content .image img{
+	margin: -10px auto;
+	width: 150px;
+	height: 150px;
+}
+
+.munimg { 
+	width: 200px;
+	height: auto;
+	padding: 10px;
+	
+}
+.munimgs{
+	width: 800px;
+	margin: auto;
+}
+
+
+.mateimg { 
+	width: 250px;
+	height: auto;
+	padding: 10px;
+	
+}
+.mateimgs{
+	width: 900px;
+	margin: auto;
+}
+
+
+.modal-content p{
+	position: relative;
+	font-size: 20px;
+}
+
+.ventmodal iframe{
+	margin: auto;
+	height:10px;
+}
+
+.galleryProj .snippets .item{
+    background-color: rgba(67, 130, 169, .89);
+    padding: 8px 18px;
+    height: fit-content;
+    width: fit-content;
+    margin: 10px;
+    font-size: 25px;
+    float: left;
+
+}
+.galleryProj .snippets a{
+    color: white;
+    height: fit-content;
+    width: fit-content;
+}
+.galleryProj .snippets .grid{
+        display: inline-flex;
+        flex-wrap: wrap;
+        max-width: 1000px;
+        align-items: center;
+  justify-content: center;
+}
+.galleryProj .snippets .item span{
+    font-size: 35px;
+}
+.galleryProj .snippets .item:hover span{
+    font-size: 50px;
+    font-weight: bold;
+}
+.galleryProj .snippets .item:hover{
+    font-size: 20px;
+    margin: 5px;
+}
+
+.galleryProj .snippets .main {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.galleryProj .articles .item:hover,
+.galleryProj .snippets .item:hover,
+.galleryProj .major .item:hover{
+	background-color: rgba(41,80,104,0.89);
+}
+
+/* Center website */
+.galleryProj .articles .main {
+  max-width: 1000px;
+  margin: auto;
+}
+.galleryProj .articles .grid{
+    display: inline-flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    
+}
+
+/* Content */
+.galleryProj .articles .item {
+  background-color: rgba(67,130,169,0.89);
+  padding: 10px;
+ height: 275px;
+ width: 200px;
+ float: left;
+ margin: 10px;
+}
+
+/* Center website */
+.galleryProj .major .main {
+  max-width: 1000px;
+  margin: auto;
+}
+.galleryProj .major .grid{
+    display: inline-flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+}
+/* Content */
+.galleryProj .major .item {
+  background-color: rgba(67,130,169,0.89);
+  padding: 10px;
+ height: 275px;
+ width: 200px;
+ float: left;
+ margin: 10px;
+}
+
+.galleryProj .add .main {
+  max-width: 1000px;
+  margin: auto;
+}
+.galleryProj .add .grid{
+    display: inline-flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+}
+/* Content */
+.galleryProj .add .item {
+  background-color: rgba(67,130,169,0.89);
+  margin: 15px;
+ height: 275px;
+ width: 200px;
+ float: left;
+}
+
+.modal .media{
+    margin: auto 50px;
+  padding: 10px;
+    display: flex;
+    float: left;
+    flex-wrap: wrap;
+    align-items: center;
+  justify-content: center;
+    
+}
+
+.modal .media iframe{
+    margin: 10px;
+}

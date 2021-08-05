@@ -1,0 +1,67 @@
+<!doctype html>
+<html style="height:100%;">
+<head>
+<meta charset="utf-8">
+<title>Portfolio.php | Eric Love</title>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link href="sitestyle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="navbar"> <a href="index.html" class="logo"><img src="images/PersonalLogo.png" width="629" height="630" alt=""/></a> <a href="index.html">Home</a> <a href="projects.html" >Projects</a> 
+<a href="resume.html">Resume</a>
+  <div class="dropdown">
+    <div class = "dropbtn">
+      <button class = "dropbtn">Contact </button>
+      <div class="dropdown-content"> <a href="mailto:ericlove2002@gmail.com" target="_blank">Email</a> <a href="https://www.linkedin.com/in/ericlove02" target="_blank">LinkedIn</a> <a href="contact.html">Message Me</a> </div>
+    </div>
+  </div>
+</div>
+<div style="padding-top:40px;height: 100%;
+    height: -webkit-calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: calc(100% - 40px);">
+<br>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:50%;margin:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></td><td><pre style="margin: 0; line-height: 125%">This is a really simple PHP script used to send the Portfolio Contact form from my website to my email.
+
+<span style="color: #557799">&lt;?php</span>
+	<span style="color: #996633">$fname</span> <span style="color: #333333">=</span> <span style="color: #996633">$_POST</span>[<span style="">&#39;firstname&#39;</span>];
+	<span style="color: #996633">$lname</span> <span style="color: #333333">=</span> <span style="color: #996633">$_POST</span>[<span style="">&#39;lastname&#39;</span>];
+  	<span style="color: #996633">$email</span> <span style="color: #333333">=</span> <span style="color: #996633">$_POST</span>[<span style="">&#39;email&#39;</span>];
+  	<span style="color: #996633">$message</span> <span style="color: #333333">=</span> <span style="color: #996633">$_POST</span>[<span style="">&#39;message&#39;</span>];
+
+	<span style="color: #996633">$to</span> <span style="color: #333333">=</span> <span style="">&#39;xxx&#39;</span>;
+
+	<span style="color: #996633">$email_subject</span> <span style="color: #333333">=</span> <span style="">&quot;Portfolio form contact&quot;</span>;
+
+	<span style="color: #996633">$email_body</span> <span style="color: #333333">=</span> <span style="">&quot;You have received a message from your portfolio site from </span><span style="">$fname</span><span style=""> </span><span style="">$lname</span><span style="">.</span><span style="color: #666666; font-weight: bold; ">\n</span><span style=""> Here is the message:</span><span style="color: #666666; font-weight: bold; ">\n</span><span style=""> </span><span style="">$message</span><span style="">&quot;</span>;
+
+<span style="color: #996633">$headers</span> <span style="color: #333333">=</span> <span style="">&quot;From: </span><span style="">$email</span><span style=""> </span><span style="color: #666666; font-weight: bold; ">\r\n</span><span style="">&quot;</span>;
+
+<span style="color: #007020">mail</span>(<span style="color: #996633">$to</span>, <span style="color: #996633">$email_subject</span>, <span style="color: #996633">$email_body</span>, <span style="color: #996633">$headers</span>);
+header(<span style="">&#39;Location: http://ericlove.online/contact-recieved.html&#39;</span>);
+<span style="color: #557799">?&gt;</span>
+</pre></td></tr></table></div>
+
+<br>
+</div>
+</body>
+</html>
